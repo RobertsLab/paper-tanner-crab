@@ -125,8 +125,21 @@ clusters <- data.frame(cluster = ifelse(clusters == 1, "cluster 1", ifelse(clust
 head(clusters)
 ```
 
+Add column annotations for the samples denoting temperature treatment and infection status:
 ```{r}
-pheatmap(noz_contrasttemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_row = clusters, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapPurpleOrange, fontsize_col = 12, fontsize_row = 12)
+sample_col <- data.frame(temperature = c("decreased", "decreased", "elevated", "elevated"))
+row.names(sample_col) <-colnames(noz_contrasttemp.heatmap)
+sample_col
+```
+
+combine the two sample info into one dataframe:
+```{r}
+sample_col$infection.status <- c("uninfected", "infected", "uninfected", "infected")
+sample_col
+```
+
+```{r}
+pheatmap(noz_contrasttemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapPurpleOrange, fontsize_col = 12, fontsize_row = 12)
 ```
 
 
