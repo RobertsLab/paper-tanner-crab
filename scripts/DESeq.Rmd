@@ -16,6 +16,7 @@ library(DESeq2)
 library(tidyverse)
 library(pheatmap)
 library(RColorBrewer)
+library(data.table)
 ```
 
 
@@ -202,10 +203,106 @@ summary(deseq2.resTemp)
 ```
 Wrote out 08/12/2020. Comment out code. 
 
+## `join` count matrix with lists of DEGs
+
+Make rownames into a column called "Trinity_ID" for the count matrix:
+```{r}
+countmatrix <- tibble::rownames_to_column(countmatrix, "Trinity_ID")
+head(countmatrix)
+```
 
 
+### Read in list of 1343 DEGs:
+```{r}
+degs_infONLY <- read.delim("../analyses/DESeq2/DEGlist-infectionONLY.tab", sep = '\t')
+head(degs_infONLY)
+```
 
+Make rownames into a column called "Trinity_ID":
+```{r}
+degs_infONLY <- tibble::rownames_to_column(degs_infONLY, "Trinity_ID")
+head(degs_infONLY)
+```
 
+`join` count matrix with degs_infONLY:
+```{r}
+degs_infONLY_counts <- left_join(countmatrix, degs_infONLY, by = "Trinity_ID")
+head(degs_infONLY_counts)
+```
 
+Only want the ones that match!
+```{r}
+degs_infONLY_counts_match <- filter(degs_infONLY_counts, baseMean != "NA")
+head(degs_infONLY_counts_match)
+```
+1343 rows. Perfect! 
 
+Write out list with count data:
+```{r}
+#write.table(degs_infONLY_counts_match, "../analyses/DESeq2/DEGlist-infONLY-counts.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+```
+wrote out 08/12/2020. Comment out code. 
+
+### Read in list of 183 DEGs:
+```{r}
+degs_inftemp <- read.delim("../analyses/DESeq2/DEGlist-infection_influenced-by-temp.tab", sep = '\t')
+head(degs_inftemp)
+```
+
+Make rownames into a column called "Trinity_ID":
+```{r}
+degs_inftemp <- tibble::rownames_to_column(degs_inftemp, "Trinity_ID")
+head(degs_inftemp)
+```
+
+`join` count matrix with degs_inftemp:
+```{r}
+degs_inftemp_counts <- left_join(countmatrix, degs_inftemp, by = "Trinity_ID")
+head(degs_inftemp_counts)
+```
+
+Only want the ones that match!
+```{r}
+degs_inftemp_counts_match <- filter(degs_inftemp_counts, baseMean != "NA")
+head(degs_inftemp_counts_match)
+```
+
+Write out list with count data:
+```{r}
+#write.table(degs_inftemp_counts_match, "../analyses/DESeq2/DEGlist-inf-temp-counts.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+```
+Wrote out 08/12/2020. Commented out code. 
+
+### Read in list of 123 DEGs:
+DEG list of genes influenced by temperature associated with infection status comparison.   
+
+```{r}
+degs_contrasttemp <- read.delim("../analyses/DESeq2/DEGlist-contrast_temperature.tab", sep = '\t')
+head(degs_contrasttemp)
+```
+
+Make rownames into a column called "Trinity_ID":
+```{r}
+degs_contrasttemp <- tibble::rownames_to_column(degs_contrasttemp, "Trinity_ID")
+head(degs_contrasttemp)
+```
+
+`join` count matrix with degs_inftemp:
+```{r}
+degs_contrasttemp_counts <- left_join(countmatrix, degs_contrasttemp, by = "Trinity_ID")
+head(degs_contrasttemp_counts)
+```
+
+Only want the ones that match!
+```{r}
+degs_contrasttemp_counts_match <- filter(degs_contrasttemp_counts, baseMean != "NA")
+head(degs_contrasttemp_counts_match)
+```
+123 rows! Good. 
+
+Write out list with count data:
+```{r}
+#write.table(degs_contrasttemp_counts_match, "../analyses/DESeq2/DEGlist-contrast-temp-counts.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+```
+wrote out 08/12/2020. commented out code. 
 
