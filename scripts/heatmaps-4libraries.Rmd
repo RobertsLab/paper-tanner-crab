@@ -138,11 +138,11 @@ sample_col$infection.status <- c("uninfected", "infected", "uninfected", "infect
 sample_col
 ```
 
-specify colors for annotation rows and columns:
+specify colors for annotation columns:
 ```{r}
 my_colors <- list(
   temperature = c(decreased = "blue", elevated = "red"),
-  infection.status = c(infected = "green", uninfected = "yellow")
+  infection.status = c(infected = "darkgreen", uninfected = "yellow")
 )
 ```
 
