@@ -121,7 +121,7 @@ head(clusters)
 
 Rename the clusters in the rows to "cluster #" instead of just the number. 
 ```{r}
-clusters <- data.frame(cluster = ifelse(clusters == 1, "cluster 1", ifelse(clusters == 2, "cluster 2", ifelse(clusters == 3, "cluster 3", "cluster 4"))))
+clusters <- data.frame(cluster = ifelse(clusters == 1, "cluster1", ifelse(clusters == 2, "cluster2", ifelse(clusters == 3, "cluster3", "cluster4"))))
 head(clusters)
 ```
 
@@ -138,10 +138,19 @@ sample_col$infection.status <- c("uninfected", "infected", "uninfected", "infect
 sample_col
 ```
 
+specify colors for annotation rows and columns:
 ```{r}
-pheatmap(noz_contrasttemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapPurpleOrange, fontsize_col = 12, fontsize_row = 12)
+my_colors <- list(
+  temperature = c(decreased = "blue", elevated = "red"),
+  infection.status = c(infected = "green", uninfected = "yellow")
+)
 ```
 
+```{r}
+pheatmap(noz_contrasttemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapPurpleOrange, fontsize_col = 12, fontsize_row = 12)
+```
+
+### `join` count data from heatmap with transcriptome v 3.1 `blast` output and uniprot-SP-GO annotation:
 
 
 
