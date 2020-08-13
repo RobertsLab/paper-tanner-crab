@@ -1,0 +1,45 @@
+---
+title: "GOslim-pie"
+output: html_document
+---
+Rmd to create a pie chart of GOslim terms from transcriptome v 3.1. 
+
+## Read in file of counts for pie chart:
+```{r}
+gopie <- read.delim("../analyses/BLAST-to-GOslim/GOslim-P-pie.txt", header = FALSE)
+gopie
+```
+
+Will not include terms: "other biological processes" or "other metabolic processes" 
+
+pie chart colors:
+```{r}
+piecolors <- RColorBrewer::brewer.pal(12, "Set3")
+```
+
+Make the pie chart with percentages:
+https://www.statmethods.net/graphs/pie.html 
+```{r}
+slices <- c(70628, 65914, 63388, 6030, 53012, 5234, 46892, 35631, 35478, 27506, 20463, 11822) #create vector of counts of GOslims based on the file read in above; don't use numbers associated with "other biological processes" or "other metabolic processes"
+lbls <- c("developmental processes", "cell organization and biogenesis", "RNA metabolism", "cell adhesion", "protein metabolism", "cell-cell signaling", "transport", "signal transduction", "stress response", "cell cycle and proliferation", "DNA metabolism", "death") #create vector of GOslim terms in the same order as the number of counts; don't include "other biological processes" or "other metabolic processes"
+pct <- round(slices/sum(slices)*100) #get percentages of each GOslim term
+lbls <- paste(lbls, pct) #add percents to labels
+lbls <- paste(lbls, "%", sep = "") #ad % to labels
+pie(slices,labels = lbls, col = piecolors)
+```
+
+Save pie chart as a pdf:
+```{r}
+pdf("../analyses/BLAST-to-GOslim/GOslim-pie-transcriptome-v3.1.pdf")
+slices <- c(70628, 65914, 63388, 6030, 53012, 5234, 46892, 35631, 35478, 27506, 20463, 11822) #create vector of counts of GOslims based on the file read in above; don't use numbers associated with "other biological processes" or "other metabolic processes"
+lbls <- c("developmental processes", "cell organization and biogenesis", "RNA metabolism", "cell adhesion", "protein metabolism", "cell-cell signaling", "transport", "signal transduction", "stress response", "cell cycle and proliferation", "DNA metabolism", "death") #create vector of GOslim terms in the same order as the number of counts; don't include "other biological processes" or "other metabolic processes"
+pct <- round(slices/sum(slices)*100) #get percentages of each GOslim term
+lbls <- paste(lbls, pct) #add percents to labels
+lbls <- paste(lbls, "%", sep = "") #ad % to labels
+pie(slices,labels = lbls, col = piecolors)
+```
+
+
+
+
+
