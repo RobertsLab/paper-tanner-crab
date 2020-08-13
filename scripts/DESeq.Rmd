@@ -155,9 +155,9 @@ abline(h=c(-1,1), col="blue")
 ```
 
 ```{r}
-#write.table(inf.sig, "../analyses/DESeq2/DEGlist-infection_influenced-by-temp.tab", sep = "\t", row.names = T, quote = FALSE, col.names = TRUE)
+#write.table(inf.sig, "../analyses/DESeq2/DEGlist-infection-with-temp.tab", sep = "\t", row.names = T, quote = FALSE, col.names = TRUE)
 ```
-Wrote out table 08/12/2020. Commented out code
+Wrote out table 08/13/2020. Commented out code
 
 ## Now to figure out what these results mean: 
 In the multifactor section of the `DESeq2` manual:                
@@ -239,9 +239,9 @@ head(degs_infONLY_counts_match)
 
 Write out list with count data:
 ```{r}
-#write.table(degs_infONLY_counts_match, "../analyses/DESeq2/DEGlist-infONLY-counts.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+#write.table(degs_infONLY_counts_match, "../analyses/DESeq2/DEGlist-infectionONLY-counts.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-wrote out 08/12/2020. Comment out code. 
+wrote out 08/13/2020. Comment out code. 
 
 ### Read in list of 183 DEGs:
 ```{r}
@@ -269,9 +269,9 @@ head(degs_inftemp_counts_match)
 
 Write out list with count data:
 ```{r}
-#write.table(degs_inftemp_counts_match, "../analyses/DESeq2/DEGlist-inf-temp-counts.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+#write.table(degs_inftemp_counts_match, "../analyses/DESeq2/DEGlist-infection-with-temp-counts.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/12/2020. Commented out code. 
+Wrote out 08/13/2020. Commented out code. 
 
 ### Read in list of 123 DEGs:
 DEG list of genes influenced by temperature associated with infection status comparison.   
@@ -302,7 +302,7 @@ head(degs_contrasttemp_counts_match)
 
 Write out list with count data:
 ```{r}
-#write.table(degs_contrasttemp_counts_match, "../analyses/DESeq2/DEGlist-contrast-temp-counts.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+#write.table(degs_contrasttemp_counts_match, "../analyses/DESeq2/DEGlist-contrast_temperature-counts.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-wrote out 08/12/2020. commented out code. 
+wrote out 08/13/2020. commented out code. 
 
