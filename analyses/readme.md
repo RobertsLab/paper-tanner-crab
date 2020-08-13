@@ -1,1 +1,13 @@
 ## `analyses` directory contents: 
+
+### [`BLAST-to-GOslim`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/BLAST-to-GOslim)       
+- [GOslim-P-pie.txt](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/BLAST-to-GOslim/GOslim-P-pie.txt)      
+Text file of GOslim terms from transcriptome v 3.1 with counts. To be used to create GOslim pie for paper. GOslim-P-pie.txt was create in this jupyter notebook: [notebooks/transcriptomev3.1-BLAST-to-GOslim.ipynb](https://github.com/RobertsLab/paper-tanner-crab/blob/master/notebooks/transcriptomev3.1-BLAST-to-GOslim.ipynb)      
+- [GOslim-pie-excel.pdf](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/BLAST-to-GOslim/GOslim-pie-excel.pdf)       
+.pdf of the GOslim pie from transcriptome v 3.1 created in this excel file: [make-GOslim-pie-transcriptome-v3.1.xlsx](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/BLAST-to-GOslim/make-GOslim-pie-transcriptome-v3.1.xlsx)     
+- [GOslim-pie-transcriptome-v3.1.pdf](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/BLAST-to-GOslim/GOslim-pie-transcriptome-v3.1.pdf)     
+.pdf of the GOslim pie from transcriptome v 3.1 create in this R script: [scripts/GOslim-pie-transcriptome-v3.1.Rmd](https://github.com/RobertsLab/paper-tanner-crab/blob/master/scripts/GOslim-pie-transcriptome-v3.1.Rmd)      
+- [_blast-sep.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/BLAST-to-GOslim/_blast-sep.tab)    
+From [notebooks/transcriptomev3.1-BLAST-to-GOslim.ipynb](https://github.com/RobertsLab/paper-tanner-crab/blob/master/notebooks/transcriptomev3.1-BLAST-to-GOslim.ipynb). Nicely separated version of the `blast` output from transcriptome v 3.1      
+- [make-GOslim-pie-transcriptome-v3.1.xlsx](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/BLAST-to-GOslim/make-GOslim-pie-transcriptome-v3.1.xlsx)     
+Excel spreadsheet used to create the excel version of the GOslim pie chart for transcriptome v 3.1 
