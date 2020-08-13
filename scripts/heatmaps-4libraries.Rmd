@@ -12,7 +12,19 @@ library(RColorBrewer)
 library(data.table)
 ```
 
+### Read in DEG lists:
 
+List of 183 DEGs (infection comparison taking temperature into account):  
+```{r}
+degs_inftemp <- read.delim("../analyses/DESeq2/DEGlist-inf-temp-counts.tab", sep = '\t')
+head(degs_inftemp)
+```
+
+List of 123 DEGs (infectin DEGs influenced by temperature treatment):
+```{r}
+degs_contrast.temp <- read.delim("../analyses/DESeq2/DEGlist-contrast-temp-counts.tab", sep = '\t')
+head(degs_contrast.temp)
+```
 
 # Make heatmaps of the two lists of count data
 
@@ -26,14 +38,14 @@ infection comparison taking temperature into account
 
 Set Trinity_ID column as rownames:
 ```{r}
-rownames(degs_inftemp_counts_match) <- degs_inftemp_counts_match$Trinity_ID #set Trinity IDs as rownames
-inftemp.heatmap <- degs_inftemp_counts_match[,-1] #remove redundant column
+rownames(degs_inftemp) <- degs_inftemp$Trinity_ID #set Trinity IDs as rownames
+inftemp.heatmap <- degs_inftemp[,-1] #remove redundant column
 head(inftemp.heatmap)
 ```
 
 Pull out just the sample count data:
 ```{r}
-inftemp.heatmap <- select(inftemp.heatmap, "380822_cold_uninfected", "380823_cold_infected", "380824_warm_uninfected", "380825_warm_infected")
+inftemp.heatmap <- select(inftemp.heatmap, "X380822_cold_uninfected", "X380823_cold_infected", "X380824_warm_uninfected", "X380825_warm_infected")
 head(inftemp.heatmap)
 ```
 
@@ -59,14 +71,14 @@ infection DEGs influenced by temperature treatment
 
 Set Trinity_ID as row names:
 ```{r}
-rownames(degs_contrasttemp_counts_match) <- degs_contrasttemp_counts_match$Trinity_ID #set Trinity IDs as rownames
-contrasttemp.heatmap <- degs_contrasttemp_counts_match[,-1] #remove redundant column
+rownames(degs_contrast.temp) <- degs_contrast.temp$Trinity_ID #set Trinity IDs as rownames
+contrasttemp.heatmap <- degs_contrast.temp[,-1] #remove redundant column
 head(contrasttemp.heatmap)
 ```
 
 Pull out just the sample count data:
 ```{r}
-contrasttemp.heatmap <- select(contrasttemp.heatmap, "380822_cold_uninfected", "380823_cold_infected", "380824_warm_uninfected", "380825_warm_infected")
+contrasttemp.heatmap <- select(contrasttemp.heatmap, "X380822_cold_uninfected", "X380823_cold_infected", "X380824_warm_uninfected", "X380825_warm_infected")
 head(contrasttemp.heatmap)
 ```
 
@@ -86,7 +98,39 @@ head(noz_contrasttemp.heatmap)
 pheatmap(noz_contrasttemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapPurpleOrange, fontsize_col = 12, fontsize_row = 12)
 ```
 
-### Annotate heatmaps with color-coded cluster assignments based on the cladogram
+### Annotate heatmap #2 with color-coded cluster assignments based on the cladogram (will be used in paper)
+
+Set heatmap for temperature contrast as an object:
+```{r}
+results <- pheatmap(noz_contrasttemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapPurpleOrange, fontsize_col = 12, fontsize_row = 12)
+```
+
+Extract 4 clusters:
+```{r}
+inftemp.clust <- cbind(noz_contrasttemp.heatmap,
+                   cluster = cutree(results$tree_row,
+                                     k = 4))
+head(inftemp.clust)
+```
+
+Pull out just the column of cluster numbers:
+```{r}
+clusters <- select(inftemp.clust, "cluster")
+head(clusters)
+```
+
+Rename the clusters in the rows to "cluster #" instead of just the number. 
+```{r}
+clusters <- data.frame(cluster = ifelse(clusters == 1, "cluster 1", ifelse(clusters == 2, "cluster 2", ifelse(clusters == 3, "cluster 3", "cluster 4"))))
+head(clusters)
+```
+
+```{r}
+pheatmap(noz_contrasttemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_row = clusters, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapPurpleOrange, fontsize_col = 12, fontsize_row = 12)
+```
+
+
+
 
 
 
