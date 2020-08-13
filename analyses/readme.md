@@ -11,3 +11,13 @@ Text file of GOslim terms from transcriptome v 3.1 with counts. To be used to cr
 From [notebooks/transcriptomev3.1-BLAST-to-GOslim.ipynb](https://github.com/RobertsLab/paper-tanner-crab/blob/master/notebooks/transcriptomev3.1-BLAST-to-GOslim.ipynb). Nicely separated version of the `blast` output from transcriptome v 3.1      
 - [make-GOslim-pie-transcriptome-v3.1.xlsx](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/BLAST-to-GOslim/make-GOslim-pie-transcriptome-v3.1.xlsx)     
 Excel spreadsheet used to create the excel version of the GOslim pie chart for transcriptome v 3.1 
+
+### [`DESeq2`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/DESeq2)     
+The files in this directory are from this Rmd: [scripts/DESeq.Rmd](https://github.com/RobertsLab/paper-tanner-crab/blob/master/scripts/DESeq.Rmd)    
+- [DEGlist-contrast-temp-counts.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/DESeq2/DEGlist-contrast-temp-counts.tab)    
+List of DEGs associated with infection status that are influenced by temperature treatment. This list of DEGs includes gene counts from the 4 libraries.     
+- [DEGlist-contrast_temperature.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/DESeq2/DEGlist-contrast_temperature.tab)   
+List of DEGs associated with infection status that are influenced by temperature treatment.      
+- [DEGlist-inf-temp-counts.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/DESeq2/DEGlist-inf-temp-counts.tab)    
+List of DEGs associated with infection status while taking temperature treatment into account. These are not the list of genes influenced by temperature. This list of DEGs includes the gene count data for the fuor libraries.     
+- [DEGlist-infONLY-counts.tab](
