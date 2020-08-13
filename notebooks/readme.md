@@ -10,3 +10,10 @@ Output files from `kallisto` for library 380823 - cold, infected from Day 2. Jup
 Output files from `kallisto` for library 380824 - warm, uninfected from Day 2. Jupyter notebook: [notebooks/kallisto-4libraries.ipynb](https://github.com/RobertsLab/paper-tanner-crab/blob/master/notebooks/kallisto-4libraries.ipynb)            
 - [kallisto/380825_warm_infected](https://github.com/RobertsLab/paper-tanner-crab/tree/master/notebooks/kallisto/380825_warm_infected)     
 OUtput files from `kallisto` for library 380825 - warm, infected from Day 2. Jupyter notebook: [notebooks/kallisto-4libraries.ipynb](https://github.com/RobertsLab/paper-tanner-crab/blob/master/notebooks/kallisto-4libraries.ipynb)            
+
+
+### Notebooks:     
+- [kallisto-4libraries.ipynb](https://github.com/RobertsLab/paper-tanner-crab/blob/master/notebooks/kallisto-4libraries.ipynb)       
+Notebook for getting gene count data for the 4 libraries (380822, 380823, 380824, and 380825) to use in `DESeq2` from transcriptome v 3.1.      
+- [transcriptomev3.1-BLAST-to-GOslim.ipynb](https://github.com/RobertsLab/paper-tanner-crab/blob/master/notebooks/transcriptomev3.1-BLAST-to-GOslim.ipynb)   
+Notebook for getting transcriptome v 3.1 `blast` output to Goslim terms.       
