@@ -1,0 +1,93 @@
+---
+title: "heatmaps-4libraries"
+output: html_document
+---
+Rmd to make heatmaps using `pheatmap` from the lists of DEGs from the Rmd: "DESeq2.md". 
+
+Load in packages:
+```{r}
+library(tidyverse)
+library(pheatmap)
+library(RColorBrewer)
+library(data.table)
+```
+
+
+
+# Make heatmaps of the two lists of count data
+
+Set heatmap colors:
+```{r}
+heatmapPurpleOrange <- RColorBrewer::brewer.pal(11, "PuOr")
+```
+
+## Heatmap of counts from list of 183 degs   
+infection comparison taking temperature into account
+
+Set Trinity_ID column as rownames:
+```{r}
+rownames(degs_inftemp_counts_match) <- degs_inftemp_counts_match$Trinity_ID #set Trinity IDs as rownames
+inftemp.heatmap <- degs_inftemp_counts_match[,-1] #remove redundant column
+head(inftemp.heatmap)
+```
+
+Pull out just the sample count data:
+```{r}
+inftemp.heatmap <- select(inftemp.heatmap, "380822_cold_uninfected", "380823_cold_infected", "380824_warm_uninfected", "380825_warm_infected")
+head(inftemp.heatmap)
+```
+
+rename columns for easier viewing in heatmap:
+```{r}
+colnames(inftemp.heatmap) <- c("380822", "380823", "380824", "380825")
+head(inftemp.heatmap)
+```
+
+Going to remove all rows that have "0" for all samples: 
+```{r}
+noz_inftemp.heatmap <- inftemp.heatmap[rowSums(inftemp.heatmap[, -1] >0) !=0, ]
+head(noz_inftemp.heatmap)
+```
+
+```{r}
+pheatmap(noz_inftemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapPurpleOrange, fontsize_col = 15, fontsize_row = 12)
+```
+408 DEGs. Infection DEGs taking temperature into account. 
+
+## Heatmap of counts from list of 123 degs 
+infection DEGs influenced by temperature treatment
+
+Set Trinity_ID as row names:
+```{r}
+rownames(degs_contrasttemp_counts_match) <- degs_contrasttemp_counts_match$Trinity_ID #set Trinity IDs as rownames
+contrasttemp.heatmap <- degs_contrasttemp_counts_match[,-1] #remove redundant column
+head(contrasttemp.heatmap)
+```
+
+Pull out just the sample count data:
+```{r}
+contrasttemp.heatmap <- select(contrasttemp.heatmap, "380822_cold_uninfected", "380823_cold_infected", "380824_warm_uninfected", "380825_warm_infected")
+head(contrasttemp.heatmap)
+```
+
+rename columns for easier viewing in heatmap:
+```{r}
+colnames(contrasttemp.heatmap) <- c("380822", "380823", "380824", "380825")
+head(contrasttemp.heatmap)
+```
+
+Going to remove all rows that have "0" for all samples: 
+```{r}
+noz_contrasttemp.heatmap <- contrasttemp.heatmap[rowSums(contrasttemp.heatmap[, -1] >0) !=0, ]
+head(noz_contrasttemp.heatmap)
+```
+
+```{r}
+pheatmap(noz_contrasttemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapPurpleOrange, fontsize_col = 12, fontsize_row = 12)
+```
+
+### Annotate heatmaps with color-coded cluster assignments based on the cladogram
+
+
+
+
