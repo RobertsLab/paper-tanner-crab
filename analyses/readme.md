@@ -14,10 +14,33 @@ Excel spreadsheet used to create the excel version of the GOslim pie chart for t
 
 ### [`DESeq2`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/DESeq2)     
 The files in this directory are from this Rmd: [scripts/DESeq.Rmd](https://github.com/RobertsLab/paper-tanner-crab/blob/master/scripts/DESeq.Rmd)    
-- [DEGlist-contrast-temp-counts.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/DESeq2/DEGlist-contrast-temp-counts.tab)    
-List of DEGs associated with infection status that are influenced by temperature treatment. This list of DEGs includes gene counts from the 4 libraries.     
+- [DEGlist-contrast_temperature-counts.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/DESeq2/DEGlist-contrast_temperature-counts.tab)    
+List of 123 DEGs associated with infection status that are influenced by temperature treatment. This list of DEGs includes gene counts from the 4 libraries.     
 - [DEGlist-contrast_temperature.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/DESeq2/DEGlist-contrast_temperature.tab)   
-List of DEGs associated with infection status that are influenced by temperature treatment.      
-- [DEGlist-inf-temp-counts.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/DESeq2/DEGlist-inf-temp-counts.tab)    
-List of DEGs associated with infection status while taking temperature treatment into account. These are not the list of genes influenced by temperature. This list of DEGs includes the gene count data for the fuor libraries.     
-- [DEGlist-infONLY-counts.tab](
+List of 123 DEGs associated with infection status that are influenced by temperature treatment.      
+- [DEGlist-infection-with-temp-counts.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/DESeq2/DEGlist-infection-with-temp-counts.tab)    
+List of 408 DEGs associated with infection status while taking temperature treatment into account. These are not the list of genes influenced by temperature. This list of DEGs includes the gene count data for the fuor libraries.     
+- [DEGlist-infection-with-temp.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/DESeq2/DEGlist-infection-with-temp.tab)      
+List of 408 DEGs associated with infection status while taking temperature treatment into account.     
+- [DEGlist-infectionONLY-counts.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/DESeq2/DEGlist-infectionONLY-counts.tab)     
+List of 1343 DEGs comparing infection status. List includes count data from the four libraries.      
+- [DEGlist-infectionONLY.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/DESeq2/DEGlist-infectionONLY.tab)       
+List of 1343 DEGs comparing infection status. 
+
+### [`kallisto-0812`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/kallisto-0812)      
+Output files from this jupyter notebook to get gene count data from the 4 libraries used for `DESeq2`. Jupyter notebook: [notebooks/kallisto-4libraries.ipynb](https://github.com/RobertsLab/paper-tanner-crab/blob/master/notebooks/kallisto-4libraries.ipynb)       
+- [kallisto-0812.isoform.TMM.EXPR.matrix](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/kallisto-0812/kallisto-0812.isoform.TMM.EXPR.matrix)          
+One of the files from `kallisto`.     
+- [kallisto-0812.isoform.TPM.not_cross_norm](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/kallisto-0812/kallisto-0812.isoform.TPM.not_cross_norm)     
+One of the files from `kallisto`.     
+- [kallisto-0812.isoform.TPM.not_cross_norm.runTMM.R](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/kallisto-0812/kallisto-0812.isoform.TPM.not_cross_norm.runTMM.R)    
+One of the files from `kallisto`.     
+- [kallisto-0812.isoform.counts.matrix](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/kallisto-0812/kallisto-0812.isoform.counts.matrix)    
+Count matrix for hte 4 libraries. Used in `DESeq2` Rmd: [scripts/DESeq.Rmd](https://github.com/RobertsLab/paper-tanner-crab/blob/master/scripts/DESeq.Rmd) 
+
+### [`pheatmap`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/pheatmap)          
+- [tempinfluenced-infectionDEGs-heatmap.pdf](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/pheatmap/tempinfluenced-infectionDEGs-heatmap.pdf)        
+Heatmap of infection DEGs that are influenced by temperature treatment. Annotated cluster row, and sample annotations. Created in this Rmd: [scripts/heatmaps-4libraries.Rmd](https://github.com/RobertsLab/paper-tanner-crab/blob/master/scripts/heatmaps-4libraries.Rmd)      
+
+
+
