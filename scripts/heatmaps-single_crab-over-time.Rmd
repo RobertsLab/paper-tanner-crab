@@ -1,0 +1,131 @@
+---
+title: "heatmaps-singlecrab_over-time"
+output: html_document
+---
+Rmd to make heatmaps using `pheatmap` of gene over time in an individual crab. This crab was infected with _Hematodinium_, kept in ambient throughout the experiment, and hemolymph was sampled on day 0, day 2, and day 17 (final day of experiment). 
+
+I will also annotate gene list with the `blast` output from transcriptome v 3.1 and uniprot/swissprot and gene ontology. 
+
+Gene count matrix is from transcriptome v 3.1. 
+
+### Load packages
+```{r}
+library(dplyr)
+library(tidyverse)
+library(pheatmap)
+library(data.table)
+library(RColorBrewer)
+```
+
+## Read in files: 
+
+1. `blast` output from transcriptome v 3.1:
+```{r}
+blast <- read.delim("../analyses/BLAST-to-GOslim/_blast-sep.tab", header = FALSE)
+head(blast)
+```
+
+Rename first and third column for `join`-ing purposes later on. 
+```{r}
+colnames(blast) <- c("Trinity_ID", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14")
+head(blast)
+```
+
+2. Read in uniprot-SP-GO file
+```{r}
+uniprot_SP_GO <- read.delim("http://owl.fish.washington.edu/halfshell/bu-alanine-wd/17-07-20/uniprot-SP-GO.sorted", sep = '\t', header = FALSE)
+head(uniprot_SP_GO)
+```
+
+Rename columns:
+```{r}
+colnames(uniprot_SP_GO) <- c("uniprot_acc_ID", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12")
+head(uniprot_SP_GO)
+```
+
+### Load in data of counts from individual crab RNAseq (transcriptome v 3.1):   
+```{r}
+norm_counts <- read.delim("../analyses/kallisto-single_crab_over_time/kallisto-single-crab.isoform.counts.matrix")
+head(norm_counts)
+```
+
+Set Trinity_ID as row names:
+```{r}
+rownames(norm_counts) <- norm_counts$X #set Trinity IDs as rownames
+norm_counts <- norm_counts[,-1] #remove redundant column
+head(norm_counts)
+```
+
+ROUND INTEGERS UP:
+```{r}
+norm_counts <- round(norm_counts,0)
+head(norm_counts)
+```
+
+Set rownames as a column again:     
+```{r}
+norm_counts <- tibble::rownames_to_column(norm_counts, "Trinity_ID")
+head(norm_counts)
+```
+
+Rename sample columns: 
+```{r}
+colnames(norm_counts) <- c("Trinity_ID", "178", "359", "463")
+head(norm_counts)
+```
+
+Set heatmap colors:
+```{r}
+heatmapBrBG <- RColorBrewer::brewer.pal(11, "BrBG")
+```
+
+### Make heatmap using `pheatmap`
+78649 rows      
+Filter out rows that have 0 across all samples:
+```{r}
+norm_counts <- norm_counts[rowSums(norm_counts[, -1] >0) !=0, ]
+head(norm_counts)
+```
+Now 39158 rows.    
+
+Now lets remove low-count genes across all samples.        
+Sum all rows in new column:            
+```{r}
+norm_counts$sums <- rowSums( norm_counts[,2:4] )
+head(norm_counts)
+```
+
+Remove columns with sums <= 30 --> didn't work. too many rows (3,504). I troubleshooted until coming to the number 55 - 2668 rows, and heatmap worked
+```{r}
+norm_counts_highcts <- filter(norm_counts, sums >= 600)
+head(norm_counts_highcts)
+```
+Now there's 3909 rows. 
+
+Remove "sums" column from count matrix for heatmap:      
+```{r}
+crab.heatmap <- select(norm_counts_highcts, "Trinity_ID", "178", "359", "463")
+head(crab.heatmap)
+```
+
+Have to make trinity ID column into rownames:
+Set Trinity_ID as row names:
+```{r}
+rownames(crab.heatmap) <- crab.heatmap$Trinity_ID #set Trinity IDs as rownames
+crab.heatmap <- crab.heatmap[,-1] #remove redundant column
+head(crab.heatmap)
+```
+
+```{r}
+pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+```
+
+
+
+
+
+
+
+
+
+
