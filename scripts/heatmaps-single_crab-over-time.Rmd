@@ -171,7 +171,8 @@ specify colors for annotation columns:
 my_colors <- list(
   temperature = c(ambient = "orange"),
   infection.status = c(infected = "yellow"),
-  sampling.day = c(day0 = "green", day2 = "red", day17 = "blue")
+  sampling.day = c(day0 = "green", day2 = "red", day17 = "blue"),
+  cluster = c(cluster1 = "#1B9E77", cluster2 = "#D95F02", cluster3 = "#7570B3", cluster4 = "#E7298A", cluster5 = "#66A61E", cluster6 = "#82ed82")
 )
 my_colors
 ```
