@@ -1,0 +1,13 @@
+{
+	"n_targets": 78649,
+	"n_bootstraps": 0,
+	"n_processed": 27021012,
+	"n_pseudoaligned": 16787891,
+	"n_unique": 5581902,
+	"p_pseudoaligned": 62.1,
+	"p_unique": 20.7,
+	"kallisto_version": "0.46.1",
+	"index_version": 10,
+	"start_time": "Sat Aug 15 13:08:04 2020",
+	"call": "/Applications/bioinfo/kallisto/kallisto quant -i /Users/graciecrandall/Documents/GitHub/paper-tanner-crab/notebooks/cbai_transcriptome_31 -t 4 -o kallisto/359_ambient_infected_2/ /Volumes/web/Atumefaciens/20200318_cbai_RNAseq_fastp_trimming/359_R1_001.fastp-trim.202003182247.fq.gz /Volumes/web/Atumefaciens/20200318_cbai_RNAseq_fastp_trimming/359_R2_001.fastp-trim.202003182247.fq.gz"
+}
