@@ -190,7 +190,16 @@ dev.off()
 ```
 
 ## Make heatmap of DEGs from `DESeq2` analyses in individual crab over time. 
-Try with infection 
+### Try with infection status comparison DEG list 
+
+
+### Try with infection taking temperature into account list 
+
+
+
+
+
+### Try with infection DEGs that are influenced by temperature 
 
 
 
