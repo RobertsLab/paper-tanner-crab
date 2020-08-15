@@ -95,12 +95,12 @@ norm_counts$sums <- rowSums( norm_counts[,2:4] )
 head(norm_counts)
 ```
 
-Remove columns with sums <= 30 --> didn't work. too many rows (3,504). I troubleshooted until coming to the number 55 - 2668 rows, and heatmap worked
+Remove columns with sums <= 64. This number (64) was chosen because it is the smallest number that can still make a heatmap. 
 ```{r}
-norm_counts_highcts <- filter(norm_counts, sums >= 600)
+norm_counts_highcts <- filter(norm_counts, sums >= 64)
 head(norm_counts_highcts)
 ```
-Now there's 3909 rows. 
+Now there's 13,954 rows. 
 
 Remove "sums" column from count matrix for heatmap:      
 ```{r}
@@ -119,6 +119,69 @@ head(crab.heatmap)
 ```{r}
 pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
 ```
+
+### Now annotate heatmap with clustering and sample info. 
+
+Set heatmap as an object:
+```{r}
+crab.over.time <- pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+```
+
+Extract 4 clusters:
+```{r}
+clust <- cbind(crab.heatmap,
+                   cluster = cutree(crab.over.time$tree_row,
+                                     k = 6))
+head(clust)
+```
+
+Pull out just the column of cluster numbers:
+```{r}
+clusters <- select(clust, "cluster")
+head(clusters)
+```
+
+Rename the clusters in the rows to "cluster #" instead of just the number. 
+```{r}
+clusters <- data.frame(cluster = ifelse(clusters == 1, "cluster1", ifelse(clusters == 2, "cluster2", ifelse(clusters == 3, "cluster3", ifelse(clusters == 4, "cluster4", ifelse(clusters == 5, "cluster5", "cluster6"))))))
+head(clusters)
+```
+
+Add column annotations for the samples denoting temperature treatment and infection status, and sampling day:
+```{r}
+sample_col <- data.frame(temperature = c("ambient", "ambient", "ambient"))
+row.names(sample_col) <-colnames(crab.heatmap)
+sample_col
+```
+
+add infection status info:
+```{r}
+sample_col$infection.status <- c("infected", "infected", "infected")
+sample_col
+```
+
+add sampling day info:
+```{r}
+sample_col$sampling.day <- c("day0", "day2", "day17")
+sample_col
+```
+
+specify colors for annotation columns:
+```{r}
+my_colors <- list(
+  temperature = c(ambient = "orange"),
+  infection.status = c(infected = "yellow"),
+  sampling.day = c(day0 = "green", day2 = "red", day17 = "blue")
+)
+my_colors
+```
+
+
+```{r}
+pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 200, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+```
+
+
 
 
 
