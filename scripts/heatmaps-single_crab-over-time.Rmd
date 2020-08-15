@@ -189,7 +189,8 @@ pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, 
 dev.off()
 ```
 
-
+## Make heatmap of DEGs from `DESeq2` analyses in individual crab over time. 
+Try with infection 
 
 
 
