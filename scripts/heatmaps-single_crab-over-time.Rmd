@@ -127,7 +127,7 @@ Set heatmap as an object:
 crab.over.time <- pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
 ```
 
-Extract 4 clusters:
+Extract 6 clusters:
 ```{r}
 clust <- cbind(crab.heatmap,
                    cluster = cutree(crab.over.time$tree_row,
@@ -172,7 +172,7 @@ my_colors <- list(
   temperature = c(ambient = "orange"),
   infection.status = c(infected = "yellow"),
   sampling.day = c(day0 = "green", day2 = "red", day17 = "blue"),
-  cluster = c(cluster1 = "#1B9E77", cluster2 = "#D95F02", cluster3 = "#7570B3", cluster4 = "#E7298A", cluster5 = "#66A61E", cluster6 = "#82ed82")
+  cluster = c(cluster1 = "#1B9E77", cluster2 = "#D95F02", cluster3 = "#7570B3", cluster4 = "#E7298A", cluster5 = "#cc4ee0", cluster6 = "#82ed82")
 )
 my_colors
 ```
@@ -182,7 +182,12 @@ my_colors
 pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 200, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
 ```
 
-
+save heatmap to analyses/pheatmap:
+```{r}
+pdf("../analyses/pheatmap/individual-crab-over-time.pdf", width = 11, height = 8.5)
+pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+dev.off()
+```
 
 
 
