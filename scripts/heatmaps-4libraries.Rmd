@@ -16,13 +16,13 @@ library(data.table)
 
 List of 183 DEGs (infection comparison taking temperature into account):  
 ```{r}
-degs_inftemp <- read.delim("../analyses/DESeq2/DEGlist-inf-temp-counts.tab", sep = '\t')
+degs_inftemp <- read.delim("../analyses/DESeq2/DEGlist-infection-with-temp-counts.tab", sep = '\t')
 head(degs_inftemp)
 ```
 
 List of 123 DEGs (infectin DEGs influenced by temperature treatment):
 ```{r}
-degs_contrast.temp <- read.delim("../analyses/DESeq2/DEGlist-contrast-temp-counts.tab", sep = '\t')
+degs_contrast.temp <- read.delim("../analyses/DESeq2/DEGlist-contrast_temperature-counts.tab", sep = '\t')
 head(degs_contrast.temp)
 ```
 
