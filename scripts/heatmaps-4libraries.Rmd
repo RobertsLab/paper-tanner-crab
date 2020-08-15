@@ -14,7 +14,7 @@ library(data.table)
 
 ### Read in DEG lists:
 
-List of 183 DEGs (infection comparison taking temperature into account):  
+List of 408 DEGs (infection comparison taking temperature into account):  
 ```{r}
 degs_inftemp <- read.delim("../analyses/DESeq2/DEGlist-infection-with-temp-counts.tab", sep = '\t')
 head(degs_inftemp)
