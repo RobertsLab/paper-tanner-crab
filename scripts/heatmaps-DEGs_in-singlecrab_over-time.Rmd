@@ -280,7 +280,7 @@ head(inftemp.blast.go)
 
 write out table to analyses/pheatmap:
 ```{r}
-#write.table(inftemp.blast.go, "../analyses/pheatmap/infectionDEGs_singlecrab-cluster-blast-go.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+#write.table(inftemp.blast.go, "../analyses/pheatmap/infection-tempDEGs_singlecrab-cluster-blast-go.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
 Wrote out 08/19/2020. Commented out code. 
 
@@ -361,8 +361,30 @@ head(temp.clusters)
 pheatmap(tempcon.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE,annotation_row = temp.clusters, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
 ```
 
+#### `join` heatmap count matrix with clusters, `blast` output and uniprot-SP-Go
 
+set rownames as column called Trinity_ID:
+```{r}
+temp.clust <- tibble::rownames_to_column(temp.clust, "Trinity_ID")
+head(temp.clust)
+```
 
+```{r}
+temp.blast <- left_join(temp.clust, blast, by = "Trinity_ID")
+head(temp.blast)
+```
+
+`join` with uniprot-SP-GO:
+```{r}
+temp.blast.go <- left_join(temp.blast, uniprot_SP_GO, by = "uniprot_acc_ID")
+head(temp.blast.go)
+```
+
+write out table to analyses/pheatmap:
+```{r}
+#write.table(temp.blast.go, "../analyses/pheatmap/contrast-tempDEGs_singlecrab-cluster-blast-go.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+```
+Wrote out 08/19/2020. Commented out code. 
 
 
 
