@@ -192,17 +192,17 @@ dev.off()
 ```
 
 
-### `join` heatmap info with `blast` output from transcriptome v 3.1 and uniprot-SP-GO. save to analyses/heatmaps
+### `join` heatmap info with clusters, `blast` output from transcriptome v 3.1 and uniprot-SP-GO. save to analyses/heatmaps
 
 Make heatmap matrix into a table with rows names as a column called "Trinity_ID":
 ```{r}
-crab.heatmap2 <- tibble::rownames_to_column(crab.heatmap, "Trinity_ID")
-head(crab.heatmap2)
+clust2 <- tibble::rownames_to_column(clust, "Trinity_ID")
+head(clust2)
 ```
 
 `join` with `blast` output:
 ```{r}
-crab.blast <- left_join(crab.heatmap2, blast, by = "Trinity_ID")
+crab.blast <- left_join(clust2, blast, by = "Trinity_ID")
 head(crab.blast)
 ```
 
