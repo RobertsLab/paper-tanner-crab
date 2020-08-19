@@ -1,0 +1,292 @@
+---
+title: "heatmaps-degs-singlecrab-over-time"
+output: html_document
+---
+Rmd to create heatmaps of the DEG lists found in `DESeq2.Rmd` in the individual crab over time. These heatmaps and associated gene lists will show the number of DEGs from each of the three comparisons that are present in the single crab over time. 
+
+Gene count matrix for the individual crab over time is from transcriptome v 3.1. 
+
+The DEG lists are in paper-tanner-crab/analyses/DESeq2/. 
+
+### Load packages
+```{r}
+library(dplyr)
+library(tidyverse)
+library(pheatmap)
+library(data.table)
+library(RColorBrewer)
+```
+
+
+Read in count matrix from crab over time - should be 78649 rows:
+```{r}
+norm_counts <- read.delim("../analyses/kallisto-single_crab_over_time/kallisto-single-crab.isoform.counts.matrix")
+head(norm_counts)
+```
+
+Set Trinity_ID as row names:
+```{r}
+rownames(norm_counts) <- norm_counts$X #set Trinity IDs as rownames
+norm_counts <- norm_counts[,-1] #remove redundant column
+head(norm_counts)
+```
+
+ROUND INTEGERS UP:
+```{r}
+norm_counts <- round(norm_counts,0)
+head(norm_counts)
+```
+
+Set rownames as a column again:     
+```{r}
+norm_counts <- tibble::rownames_to_column(norm_counts, "Trinity_ID")
+head(norm_counts)
+```
+
+Rename columns to just the sequence IDs:
+```{r}
+colnames(norm_counts) <- c ("Trinity_ID", "178", "359", "463")
+head(norm_counts)
+```
+
+Set heatmap colors:
+```{r}
+heatmapBrBG <- RColorBrewer::brewer.pal(11, "BrBG")
+```
+
+# Try with infection status comparison DEG list 
+Read in DEG (1343) list from infection status comparison, not taking temperature into account in any way:
+```{r}
+infection_degs <- read.delim("../analyses/DESeq2/DEGlist-infectionONLY.tab", sep = '\t')
+head(infection_degs)
+```
+
+Set rownames as a column called "Trinity_ID" 
+```{r}
+infection_degs <- tibble::rownames_to_column(infection_degs, "Trinity_ID")
+head(infection_degs)
+```
+
+`join` the DEGs with the norm_counts matrix to find out how many match between the two tables:
+```{r}
+indiv_infection <- left_join(norm_counts, infection_degs, by = "Trinity_ID")
+head(indiv_infection)
+```
+
+Just want the ones that match. Filter out just the rows that have something in column "". 
+```{r}
+indiv_infection <- filter(indiv_infection, baseMean != "NA")
+head(indiv_infection)
+```
+It is now 1343 rows.
+
+Pull out counts for the samples to make a heatmap
+```{r}
+infection.heatmap <- select(indiv_infection, "Trinity_ID", "178", "359", "463")
+head(infection.heatmap)
+```
+
+Set Trinity IDs as rownames:
+```{r}
+rownames(infection.heatmap) <- infection.heatmap$Trinity_ID #set Trinity IDs as rownames
+infection.heatmap <- infection.heatmap[,-1] #remove redundant column
+head(infection.heatmap)
+```
+
+filter out rows that have zero counts across:
+```{r}
+infection.heatmap <- infection.heatmap[rowSums(infection.heatmap[, -1] >0) !=0, ]
+head(infection.heatmap)
+```
+Now it's 551 rows. 
+
+```{r}
+infection.map <- pheatmap(infection.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+```
+
+Annotate heatmap with cluster column.       
+Extract  clusters:
+```{r}
+inf.clust <- cbind(infection.heatmap,
+                   cluster = cutree(infection.map$tree_row,
+                                     k = 4))
+head(inf.clust)
+```
+
+Pull out just the column of cluster numbers:
+```{r}
+inf.clusters <- select(inf.clust, "cluster")
+head(inf.clusters)
+```
+
+Rename the clusters in the rows to "cluster #" instead of just the number. 
+```{r}
+inf.clusters <- data.frame(inf.cluster = ifelse(inf.clusters == 1, "cluster1", ifelse(inf.clusters == 2, "cluster2", ifelse(inf.clusters == 3, "cluster3", "cluster4"))))
+head(inf.clusters)
+```
+
+```{r}
+pheatmap(infection.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, annotation_row = inf.clusters, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+```
+
+
+# Try with infection taking temperature into account list 
+Read in DEGs (408) of infection status taking temperature into account:
+```{r}
+inftemp_degs <- read.delim("../analyses/DESeq2/DEGlist-infection-with-temp.tab", sep = '\t')
+head(inftemp_degs)
+```
+
+Set rownames as a column called "Trinity_ID" 
+```{r}
+inftemp_degs <- tibble::rownames_to_column(inftemp_degs, "Trinity_ID")
+head(inftemp_degs)
+```
+
+`join` the DEGs with the norm_counts matrix to find out how many match between the two tables:
+```{r}
+indiv_inftemp <- left_join(norm_counts, inftemp_degs, by = "Trinity_ID")
+head(indiv_inftemp)
+```
+
+Just want the ones that match. Filter out just the rows that have something in column "". 
+```{r}
+indiv_inftemp <- filter(indiv_inftemp, baseMean != "NA")
+head(indiv_inftemp)
+```
+408. 
+
+Pull out counts for the samples to make a heatmap
+```{r}
+inftemp.heatmap <- select(indiv_inftemp, "Trinity_ID", "178", "359", "463")
+head(inftemp.heatmap)
+```
+
+Set Trinity IDs as rownames:
+```{r}
+rownames(inftemp.heatmap) <- inftemp.heatmap$Trinity_ID #set Trinity IDs as rownames
+inftemp.heatmap <- inftemp.heatmap[,-1] #remove redundant column
+head(inftemp.heatmap)
+```
+
+filter out rows that have zero counts across:
+```{r}
+inftemp.heatmap <- inftemp.heatmap[rowSums(inftemp.heatmap[, -1] >0) !=0, ]
+head(inftemp.heatmap)
+```
+Now 212 rows. 
+
+```{r}
+inftemp.map <- pheatmap(inftemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+```
+
+Annotate heatmap with cluster column.       
+Extract  clusters:
+```{r}
+inftemp.clust <- cbind(inftemp.heatmap,
+                   cluster = cutree(inftemp.map$tree_row,
+                                     k = 4))
+head(inftemp.clust)
+```
+
+Pull out just the column of cluster numbers:
+```{r}
+inftemp.clusters <- select(inftemp.clust, "cluster")
+head(inftemp.clusters)
+```
+
+Rename the clusters in the rows to "cluster #" instead of just the number. 
+```{r}
+inftemp.clusters <- data.frame(inftemp.clusters = ifelse(inftemp.clusters == 1, "cluster1", ifelse(inftemp.clusters == 2, "cluster2", ifelse(inftemp.clusters == 3, "cluster3", "cluster4"))))
+head(inftemp.clusters)
+```
+
+
+```{r}
+pheatmap(inftemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, annotation_row = inf.clusters, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+```
+
+
+# Try with infection DEGs that are influenced by temperature 
+Read in DEG (123) list of infection status comparison that are influenced by temperature. 
+```{r}
+tempcontrast_degs <- read.delim("../analyses/DESeq2/DEGlist-contrast_temperature.tab", sep = '\t')
+head(tempcontrast_degs)
+```
+
+Set rownames as a column called "Trinity_ID" 
+```{r}
+tempcontrast_degs <- tibble::rownames_to_column(tempcontrast_degs, "Trinity_ID")
+head(tempcontrast_degs)
+```
+
+`join` the DEGs with the norm_counts matrix to find out how many match between the two tables:
+```{r}
+indiv_tempcon <- left_join(norm_counts, tempcontrast_degs, by = "Trinity_ID")
+head(indiv_tempcon)
+```
+123 genes 
+
+
+Just want the ones that match. Filter out just the rows that have something in column "". 
+```{r}
+indiv_tempcon <- filter(indiv_tempcon, baseMean != "NA")
+head(indiv_tempcon)
+```
+
+Pull out counts for the samples to make a heatmap
+```{r}
+tempcon.heatmap <- select(indiv_tempcon, "Trinity_ID", "178", "359", "463")
+head(tempcon.heatmap)
+```
+
+Set Trinity IDs as rownames:
+```{r}
+rownames(tempcon.heatmap) <- tempcon.heatmap$Trinity_ID #set Trinity IDs as rownames
+tempcon.heatmap <- tempcon.heatmap[,-1] #remove redundant column
+head(tempcon.heatmap)
+```
+
+filter out rows that have zero counts across:
+```{r}
+tempcon.heatmap <- tempcon.heatmap[rowSums(tempcon.heatmap[, -1] >0) !=0, ]
+head(tempcon.heatmap)
+```
+94 rows. 
+
+```{r}
+tempcon.map <- pheatmap(tempcon.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+```
+
+Annotate heatmap with cluster column.       
+Extract  clusters:
+```{r}
+temp.clust <- cbind(tempcon.heatmap,
+                   cluster = cutree(tempcon.map$tree_row,
+                                     k = 4))
+head(temp.clust)
+```
+
+Pull out just the column of cluster numbers:
+```{r}
+temp.clusters <- select(temp.clust, "cluster")
+head(temp.clusters)
+```
+
+Rename the clusters in the rows to "cluster #" instead of just the number. 
+```{r}
+temp.clusters <- data.frame(temp.clusters = ifelse(temp.clusters == 1, "cluster1", ifelse(temp.clusters == 2, "cluster2", ifelse(temp.clusters == 3, "cluster3", "cluster4"))))
+head(temp.clusters)
+```
+
+```{r}
+pheatmap(tempcon.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE,annotation_row = temp.clusters, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+```
+
+
+
+
+
+
+
+
