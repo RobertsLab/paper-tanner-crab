@@ -156,6 +156,32 @@ head(inf.clusters)
 pheatmap(infection.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, annotation_row = inf.clusters, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
 ```
 
+### `join` heatmap counts, clustering, with `blast` output and uniprot-SP-GO:
+make rownames into a Trinity_ID column
+```{r}
+inf.clust <- tibble::rownames_to_column(inf.clust, "Trinity_ID")
+head(inf.clust)
+```
+
+`join` with `blast` output:
+```{r}
+inf.blast <- left_join(inf.clust, blast, by = "Trinity_ID")
+head(inf.blast)
+```
+
+`join` with uniprot GO:
+```{r}
+inf.blast.go <- left_join(inf.blast, uniprot_SP_GO, by = "uniprot_acc_ID")
+head(inf.blast.go)
+```
+
+Write out:
+```{r}
+#write.table(inf.blast.go, "../analyses/pheatmap/infectionDEGs_singlecrab-clust-blast-go.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+```
+wrote out 08/19/2020. commented out code. 
+
+
 
 # Try with infection taking temperature into account list 
 Read in DEGs (408) of infection status taking temperature into account:
