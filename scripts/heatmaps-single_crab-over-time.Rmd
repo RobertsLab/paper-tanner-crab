@@ -43,7 +43,9 @@ colnames(uniprot_SP_GO) <- c("uniprot_acc_ID", "V2", "V3", "V4", "V5", "V6", "V7
 head(uniprot_SP_GO)
 ```
 
-### Load in data of counts from individual crab RNAseq (transcriptome v 3.1):   
+### Load in data of counts from individual crab RNAseq (transcriptome v 3.1): 
+
+ambient, infected crab. days 0, 2, and 17
 ```{r}
 norm_counts <- read.delim("../analyses/kallisto-single_crab_over_time/kallisto-single-crab.isoform.counts.matrix")
 head(norm_counts)
@@ -188,5 +190,34 @@ pdf("../analyses/pheatmap/individual-crab-over-time.pdf", width = 11, height = 8
 pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
 dev.off()
 ```
+
+
+### `join` heatmap info with `blast` output from transcriptome v 3.1 and uniprot-SP-GO. save to analyses/heatmaps
+
+Make heatmap matrix into a table with rows names as a column called "Trinity_ID":
+```{r}
+crab.heatmap2 <- tibble::rownames_to_column(crab.heatmap, "Trinity_ID")
+head(crab.heatmap2)
+```
+
+`join` with `blast` output:
+```{r}
+crab.blast <- left_join(crab.heatmap2, blast, by = "Trinity_ID")
+head(crab.blast)
+```
+
+`join` with uniprot-SP-go:
+```{r}
+crab.blast.go <- left_join(crab.blast, uniprot_SP_GO, by = "uniprot_acc_ID")
+head(crab.blast.go)
+```
+
+Write out into paper-tanner-crab/analyses/heatmaps:
+```{r}
+#write.table(crab.blast.go, "../analyses/pheatmap/single_crab-clusters-blast-GO.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+```
+Wrote out 08/19/2020. Comment out code. 
+
+
 
 
