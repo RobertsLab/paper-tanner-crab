@@ -18,7 +18,34 @@ library(RColorBrewer)
 ```
 
 
-Read in count matrix from crab over time - should be 78649 rows:
+## Read in files: 
+
+1. `blast` output from transcriptome v 3.1:
+```{r}
+blast <- read.delim("../analyses/BLAST-to-GOslim/_blast-sep.tab", header = FALSE)
+head(blast)
+```
+
+Rename first and third column for `join`-ing purposes later on. 
+```{r}
+colnames(blast) <- c("Trinity_ID", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14")
+head(blast)
+```
+
+2. Read in uniprot-SP-GO file
+```{r}
+uniprot_SP_GO <- read.delim("http://owl.fish.washington.edu/halfshell/bu-alanine-wd/17-07-20/uniprot-SP-GO.sorted", sep = '\t', header = FALSE)
+head(uniprot_SP_GO)
+```
+
+Rename columns:
+```{r}
+colnames(uniprot_SP_GO) <- c("uniprot_acc_ID", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12")
+head(uniprot_SP_GO)
+```
+
+
+3. Read in count matrix from crab over time - should be 78649 rows:
 ```{r}
 norm_counts <- read.delim("../analyses/kallisto-single_crab_over_time/kallisto-single-crab.isoform.counts.matrix")
 head(norm_counts)
@@ -205,6 +232,31 @@ head(inftemp.clusters)
 ```{r}
 pheatmap(inftemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, annotation_row = inf.clusters, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
 ```
+
+#### `join` heatmap counts with clustering, blast output, and uniprot-SP-GO:
+
+set rownames as a column called "Trinity_ID":
+```{r}
+inftemp.clust <- tibble::rownames_to_column(inftemp.clust, "Trinity_ID")
+head(inftemp.clust)
+```
+
+```{r}
+inftemp.blast <- left_join(inftemp.clust, blast, by = "Trinity_ID")
+head(inftemp.blast)
+```
+
+`join` with uniprot-SP-GO:
+```{r}
+inftemp.blast.go <- left_join(inftemp.blast, uniprot_SP_GO, by = "uniprot_acc_ID")
+head(inftemp.blast.go)
+```
+
+write out table to analyses/pheatmap:
+```{r}
+#write.table(inftemp.blast.go, "../analyses/pheatmap/infectionDEGs_singlecrab-cluster-blast-go.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+```
+Wrote out 08/19/2020. Commented out code. 
 
 
 # Try with infection DEGs that are influenced by temperature 
