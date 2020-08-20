@@ -1,0 +1,14 @@
+---
+title: "get-stress-genes"
+output: html_document
+---
+Rmd to get list of stress response genes from the transcriptome v 3.1 with `blast` output and uniprot-SP-Go annotation. 
+
+```{r}
+library(dplyr)
+library(tidyverse)
+```
+
+Read in table of transcriptome v 3.1 
+
+
