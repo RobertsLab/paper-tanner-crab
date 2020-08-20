@@ -9,6 +9,77 @@ library(dplyr)
 library(tidyverse)
 ```
 
-Read in table of transcriptome v 3.1 
+Read in the uniprot-SP-GO.sorted file:
+```{r}
+uniprot_SP_GO <- read.delim("http://owl.fish.washington.edu/halfshell/bu-alanine-wd/17-07-20/uniprot-SP-GO.sorted", sep = '\t', header = FALSE)
+head(uniprot_SP_GO)
+```
+
+Rename columns:
+```{r}
+colnames(uniprot_SP_GO) <- c("uniprot_acc_ID", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12")
+head(uniprot_SP_GO)
+```
+
+Read in `blast` output from transcriptome v 3.1:
+```{r}
+blast <- read.delim("../analyses/BLAST-to-GOslim/_blast-sep.tab", header = FALSE)
+head(blast)
+```
+
+Rename first and third column for `join`-ing purposes later on. 
+```{r}
+colnames(blast) <- c("Trinity_ID", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14")
+head(blast)
+```
+
+`join` the `blast` output with the uniprot-SP-GO by uniprot_acc_ID:
+```{r}
+blastgo <- left_join(blast, uniprot_SP_GO, by = "uniprot_acc_ID")
+head(blastgo)
+```
+147454 rows with 25 columns
+
+Read in the table from the BLAST to GOslim jupyter notebook called "Blastquery-GOslim.tab":
+```{r}
+blastquery <- read.delim("../analyses/BLAST-to-GOslim/Blastquery-GOslim.tab", sep = '\t', header = FALSE)
+head(blastquery)
+```
+1395724 rows.
+
+Add column names:
+```{r}
+colnames(blastquery) <- c("Trinity_ID", "GO_ID", "GOslim", "biological_process")
+head(blastquery)
+```
+
+Subset the GOslim terms that have the word "stress" in them. Only the term "stress response" has the term "stress":
+```{r}
+stress <- blastquery %>%
+  filter(str_detect(GOslim, "stress"))
+head(stress)
+```
+35478 Trinity IDs.
+
+`join` the stress list with the annotated `blast` output with uniprot (blastgo):
+```{r}
+stress_annot <- left_join(stress, blastgo, by = "Trinity_ID")
+head(stress_annot)
+```
+36735 rows. 28 columns.       
+Some Trinity IDs have multiple GO IDs associated with it - hence the extra rows. 
+
+write out the annotated stress response table:
+```{r}
+#write.table(stress_annot, "../analyses/BLAST-to-GOslim/transcriptome-stress-genes.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+```
+Wrote out 08/19/2020. Commented out code. 
+
+
+
+
+
+
+
 
 
