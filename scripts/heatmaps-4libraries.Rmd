@@ -192,21 +192,21 @@ inftemp.clust <- tibble::rownames_to_column(inftemp.clust, "Trinity_ID")
 head(inftemp.clust)
 ```
 
-`join` the `blast` output and uniprot-SP-GO:  
+`join` the `blast` output with the inftemp.clust:  
 ```{r}
-blastgo <- left_join(blast, uniprot_SP_GO, by = "uniprot_acc_ID")
-head(blastgo)
+blastinftemp <- left_join(inftemp.clust, blast, by = "Trinity_ID")
+head(blastinftemp)
 ```
 
-`join` the previous file with inftemp.clust:
+`join` the previous file with uniprot-SP-GO:
 ```{r}
-inftemp.clust.blastgo <- left_join(inftemp.clust, blastgo, by = "Trinity_ID")
-head(inftemp.clust.blastgo)
+blastinftemp.GO <- left_join(blastinftemp, uniprot_SP_GO, by = "uniprot_acc_ID")
+head(blastinftemp.GO)
 ```
 
 write out table:
 ```{r}
-#write.table(inftemp.clust.blastgo, "../analyses/pheatmap/contrasttemp_DEGs-clusters-annot.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+#write.table(blastinftemp.GO, "../analyses/pheatmap/contrasttemp_DEGs-clusters-annot.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
 Wrote out 08/20/2020. Commented out code. 
 
