@@ -386,6 +386,41 @@ write out table to analyses/pheatmap:
 ```
 Wrote out 08/19/2020. Commented out code. 
 
+--------------------------------
+
+# Figure out which of the 94 temp-influenced infection DEGs are in which clusters of the single crab over time heatmap. 
+To do this, `join` the table of 94 temp-influenced infection DEGs with the table of #### genes used to create the heatmap of genes present in an individual crab over time. 
+
+Read in the table of genes with clusters and annotation from the individual crab over time heatmap (from Rmd: heatmaps-single_crab-over-time.Rmd) 
+```{r}
+singlecrab.genes <- read.delim("../analyses/pheatmap/single_crab-clusters-blast-GO.tab")
+head(singlecrab.genes)
+```
+13978 rows. Some duplicate trinity IDs as a result of `join`-ing with `blast` output. There are 13,954 unique genes. 
+
+Set the rownames to a column called "Trintity_ID" for tempcon.heatmap:
+```{r}
+tempcon.heatmap <- tibble::rownames_to_column(tempcon.heatmap, "Trinity_ID")
+head(tempcon.heatmap)
+```
+
+
+`join` the table of 94 temp-influenced infection DEGs (tempcon.heatmap) with the singlecrab.genes:
+```{r}
+tempcon.singlecrab.genes <- left_join(tempcon.heatmap, singlecrab.genes, by = "Trinity_ID")
+head(tempcon.singlecrab.genes)
+```
+
+Write out table to analyses:
+```{r}
+#write.table(tempcon.singlecrab.genes, "../analyses/pheatmap/temp-influenced-infectionDEGs-singlecrab-overtime.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+```
+Wrote out 08/20/2020. Commented out code. 
+
+
+
+
+
 
 
 
