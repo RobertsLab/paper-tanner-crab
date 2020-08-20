@@ -33,7 +33,7 @@ Set heatmap colors:
 heatmapPurpleOrange <- RColorBrewer::brewer.pal(11, "PuOr")
 ```
 
-## Heatmap of counts from list of 183 degs   
+## Heatmap of counts from list of 408 degs   
 infection comparison taking temperature into account
 
 Set Trinity_ID column as rownames:
@@ -67,7 +67,8 @@ pheatmap(noz_inftemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = 
 408 DEGs. Infection DEGs taking temperature into account. 
 
 ## Heatmap of counts from list of 123 degs 
-infection DEGs influenced by temperature treatment
+infection DEGs influenced by temperature treatment    
+USED in PAPER
 
 Set Trinity_ID as row names:
 ```{r}
@@ -159,6 +160,57 @@ dev.off()
 ```
 
 ### `join` count data from heatmap with transcriptome v 3.1 `blast` output and uniprot-SP-GO annotation:
+
+Load in `blast` output and uniprot-SP-GO files:
+```{r}
+blast <- read.delim("../analyses/BLAST-to-GOslim/_blast-sep.tab", header = FALSE)
+head(blast)
+```
+
+Rename first and third column for `join`-ing purposes later on. 
+```{r}
+colnames(blast) <- c("Trinity_ID", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14")
+head(blast)
+```
+
+Read in uniprot-SP-GO file
+```{r}
+uniprot_SP_GO <- read.delim("http://owl.fish.washington.edu/halfshell/bu-alanine-wd/17-07-20/uniprot-SP-GO.sorted", sep = '\t', header = FALSE)
+head(uniprot_SP_GO)
+```
+
+Rename columns:
+```{r}
+colnames(uniprot_SP_GO) <- c("uniprot_acc_ID", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12")
+head(uniprot_SP_GO)
+```
+
+Set rownames in heatmap matrix as column called "Trinity_ID":
+
+```{r}
+inftemp.clust <- tibble::rownames_to_column(inftemp.clust, "Trinity_ID")
+head(inftemp.clust)
+```
+
+`join` the `blast` output and uniprot-SP-GO:  
+```{r}
+blastgo <- left_join(blast, uniprot_SP_GO, by = "uniprot_acc_ID")
+head(blastgo)
+```
+
+`join` the previous file with inftemp.clust:
+```{r}
+inftemp.clust.blastgo <- left_join(inftemp.clust, blastgo, by = "Trinity_ID")
+head(inftemp.clust.blastgo)
+```
+
+write out table:
+```{r}
+#write.table(inftemp.clust.blastgo, "../analyses/pheatmap/contrasttemp_DEGs-clusters-annot.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+```
+Wrote out 08/20/2020. Commented out code. 
+
+
 
 
 
