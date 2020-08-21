@@ -82,7 +82,7 @@ heatmapBrBG <- RColorBrewer::brewer.pal(11, "BrBG")
 ```
 
 ### Make heatmap using `pheatmap`
-78649 rows      
+39158 rows      
 Filter out rows that have 0 across all samples:
 ```{r}
 norm_counts <- norm_counts[rowSums(norm_counts[, -1] >0) !=0, ]
@@ -129,7 +129,8 @@ Set heatmap as an object:
 crab.over.time <- pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
 ```
 
-Extract 6 clusters:
+Extract 6 clusters:   
+Chose 6 because when I chose 4, it clumped some of the bigger clusters together.
 ```{r}
 clust <- cbind(crab.heatmap,
                    cluster = cutree(crab.over.time$tree_row,
@@ -216,7 +217,7 @@ Write out into paper-tanner-crab/analyses/heatmaps:
 ```{r}
 #write.table(crab.blast.go, "../analyses/pheatmap/single_crab-clusters-blast-GO.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/19/2020. Comment out code. 
+Wrote out 08/21/2020. Comment out code. 
 
 
 
