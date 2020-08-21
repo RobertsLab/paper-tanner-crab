@@ -20,7 +20,7 @@ piecolors <- RColorBrewer::brewer.pal(12, "Set3")
 Make the pie chart with percentages:
 https://www.statmethods.net/graphs/pie.html 
 ```{r}
-slices <- c(70628, 65914, 63388, 6030, 53012, 5234, 46892, 35631, 35478, 27506, 20463, 11822) #create vector of counts of GOslims based on the file read in above; don't use numbers associated with "other biological processes" or "other metabolic processes"
+slices <- c(27180, 23834, 23352, 1772, 17336, 2177, 15103, 10364, 11046, 8995, 6608, 3864) #create vector of counts of GOslims based on the file read in above; don't use numbers associated with "other biological processes" or "other metabolic processes"
 lbls <- c("developmental processes", "cell organization and biogenesis", "RNA metabolism", "cell adhesion", "protein metabolism", "cell-cell signaling", "transport", "signal transduction", "stress response", "cell cycle and proliferation", "DNA metabolism", "death") #create vector of GOslim terms in the same order as the number of counts; don't include "other biological processes" or "other metabolic processes"
 pct <- round(slices/sum(slices)*100) #get percentages of each GOslim term
 lbls <- paste(lbls, pct) #add percents to labels
