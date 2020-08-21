@@ -1,14 +1,14 @@
-88398 other biological processes
-70628 developmental processes
-65914 cell organization and biogenesis
-65145 other metabolic processes
-63388 RNA metabolism
-6030 cell adhesion
-53012 protein metabolism
-5234 cell-cell signaling
-46892 transport
-35631 signal transduction
-35478 stress response
-27506 cell cycle and proliferation
-20463 DNA metabolism
-11822 death
+8995 cell cycle and proliferation
+6608 DNA metabolism
+3864 death
+27904 other biological processes
+27180 developmental processes
+23834 cell organization and biogenesis
+23352 RNA metabolism
+2177 cell-cell signaling
+20876 other metabolic processes
+1772 cell adhesion
+17336 protein metabolism
+15103 transport
+11046 stress response
+10364 signal transduction
