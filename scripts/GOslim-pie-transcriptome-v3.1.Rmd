@@ -39,6 +39,33 @@ lbls <- paste(lbls, "%", sep = "") #ad % to labels
 pie(slices,labels = lbls, col = piecolors)
 ```
 
+----
+
+Make pie including the "other..." GOslim terms to get more accurate percentages:
+
+From here: https://stackoverflow.com/questions/33259275/how-to-place-the-labels-further-from-pie-chart
+
+
+New pie colors for 14 terms:
+```{r}
+newpiecolors <- rainbow(14)
+```
+
+```{r}
+pdf("../analyses/BLAST-to-GOslim/allterms.GOslim-pie-transcriptome-v3.1.pdf")
+slices2 <- c(27180, 23834, 23352, 1772, 17336, 2177, 15103, 10364, 11046, 8995, 6608, 3864, 27904, 20876) #create vector of counts of GOslims based on the file read in above
+lbls2 <- c("developmental processes", "cell organization and biogenesis", "RNA metabolism", "cell adhesion", "protein metabolism", "cell-cell signaling", "transport", "signal transduction", "stress response", "cell cycle and proliferation", "DNA metabolism", "death", "other biological processes", "other metabolic processes") #create vector of GOslim terms in the same order as the number of counts
+pct2 <- round(slices2/sum(slices2)*100) #get percentages of each GOslim term
+lbls2 <- paste(lbls2, pct2) #add percents to labels
+lbls2 <- paste(lbls2, "%", sep = "") #ad % to labels
+pie(slices2, labels = lbls2, col = newpiecolors)
+```
+
+
+
+
+
+
 
 
 
