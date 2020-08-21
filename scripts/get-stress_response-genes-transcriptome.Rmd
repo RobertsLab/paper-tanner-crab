@@ -38,14 +38,14 @@ head(blast)
 blastgo <- left_join(blast, uniprot_SP_GO, by = "uniprot_acc_ID")
 head(blastgo)
 ```
-147454 rows with 25 columns
+50038 rows with 25 columns
 
 Read in the table from the BLAST to GOslim jupyter notebook called "Blastquery-GOslim.tab":
 ```{r}
 blastquery <- read.delim("../analyses/BLAST-to-GOslim/Blastquery-GOslim.tab", sep = '\t', header = FALSE)
 head(blastquery)
 ```
-1395724 rows.
+459411 rows.
 
 Add column names:
 ```{r}
@@ -59,7 +59,7 @@ stress <- blastquery %>%
   filter(str_detect(GOslim, "stress"))
 head(stress)
 ```
-35478 Trinity IDs.
+11046 Trinity IDs.
 
 `join` the stress list with the annotated `blast` output with uniprot (blastgo):
 ```{r}
@@ -73,7 +73,7 @@ write out the annotated stress response table:
 ```{r}
 #write.table(stress_annot, "../analyses/BLAST-to-GOslim/transcriptome-stress-genes.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/19/2020. Commented out code. 
+Wrote out 08/20/2020. Commented out code. 
 
 
 
