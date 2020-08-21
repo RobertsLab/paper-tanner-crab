@@ -66,6 +66,59 @@ pheatmap(noz_inftemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = 
 ```
 408 DEGs. Infection DEGs taking temperature into account. 
 
+### `join` with `blast` output and uniprot-SP-GO:
+
+Load in `blast` output and uniprot-SP-GO files:
+```{r}
+blast <- read.delim("../analyses/BLAST-to-GOslim/_blast-sep.tab", header = FALSE)
+head(blast)
+```
+
+
+Rename first and third column for `join`-ing purposes later on. 
+```{r}
+colnames(blast) <- c("Trinity_ID", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14")
+head(blast)
+```
+
+Read in uniprot-SP-GO file
+```{r}
+uniprot_SP_GO <- read.delim("http://owl.fish.washington.edu/halfshell/bu-alanine-wd/17-07-20/uniprot-SP-GO.sorted", sep = '\t', header = FALSE)
+head(uniprot_SP_GO)
+```
+
+Rename columns:
+```{r}
+colnames(uniprot_SP_GO) <- c("uniprot_acc_ID", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12")
+head(uniprot_SP_GO)
+```
+
+Set rownames for inftemp.heatmap as a column called "Trinity_ID":
+```{r}
+inftemp.heatmap <- tibble::rownames_to_column(inftemp.heatmap, "Trinity_ID")
+head(inftemp.heatmap)
+```
+
+`join` the `blast` output with the uniprot-SP-GO:  
+```{r}
+blast_uniprot <- left_join(blast, uniprot_SP_GO, by = "uniprot_acc_ID")
+head(blast_uniprot)
+```
+
+`join` the previous file with inftemp.heatmap:
+```{r}
+blast_uniprot_inftemp <- left_join(inftemp.heatmap, blast_uniprot, by = "Trinity_ID")
+head(blast_uniprot_inftemp)
+```
+
+write out table with counts, blast output, and uniprot-SP-GO:
+```{r}
+#write.table(blast_uniprot_inftemp, "../analyses/pheatmap/infection-temp-DEGs-counts_annot.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+```
+Wrote out 08/21/2020. Commented out code. 
+
+----
+
 ## Heatmap of counts from list of 123 degs 
 infection DEGs influenced by temperature treatment    
 USED in PAPER
@@ -108,15 +161,15 @@ results <- pheatmap(noz_contrasttemp.heatmap, scale = "row", cluster_row = TRUE,
 
 Extract 4 clusters:
 ```{r}
-inftemp.clust <- cbind(noz_contrasttemp.heatmap,
+contrast.clust <- cbind(noz_contrasttemp.heatmap,
                    cluster = cutree(results$tree_row,
                                      k = 4))
-head(inftemp.clust)
+head(contrast.clust)
 ```
 
 Pull out just the column of cluster numbers:
 ```{r}
-clusters <- select(inftemp.clust, "cluster")
+clusters <- select(contrast.clust, "cluster")
 head(clusters)
 ```
 
@@ -188,27 +241,27 @@ head(uniprot_SP_GO)
 Set rownames in heatmap matrix as column called "Trinity_ID":
 
 ```{r}
-inftemp.clust <- tibble::rownames_to_column(inftemp.clust, "Trinity_ID")
-head(inftemp.clust)
+contrast.clust <- tibble::rownames_to_column(contrast.clust, "Trinity_ID")
+head(contrast.clust)
 ```
 
-`join` the `blast` output with the inftemp.clust:  
+`join` the `blast` output with the uniprot-SP-GO:  
 ```{r}
-blastinftemp <- left_join(inftemp.clust, blast, by = "Trinity_ID")
-head(blastinftemp)
+blast_uniprot <- left_join(blast, uniprot_SP_GO, by = "uniprot_acc_ID")
+head(blast_uniprot)
 ```
 
-`join` the previous file with uniprot-SP-GO:
+`join` the previous file with contrast.clust:
 ```{r}
-blastinftemp.GO <- left_join(blastinftemp, uniprot_SP_GO, by = "uniprot_acc_ID")
-head(blastinftemp.GO)
+blast_uniprot_contrast <- left_join(contrast.clust, blast_uniprot, by = "Trinity_ID")
+head(blast_uniprot_contrast)
 ```
 
 write out table:
 ```{r}
-#write.table(blastinftemp.GO, "../analyses/pheatmap/contrasttemp_DEGs-clusters-annot.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+#write.table(blast_uniprot_contrast, "../analyses/pheatmap/contrasttemp_DEGs-clusters-annot.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/20/2020. Commented out code. 
+Wrote out 08/21/2020. Commented out code. 
 
 
 
