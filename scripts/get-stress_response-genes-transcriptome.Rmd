@@ -41,6 +41,13 @@ head(blastgo)
 ```
 48551 rows with 21 columns
 
+Write out annotated blast go output:
+```{r}
+#write.table(blastgo, "../data/transcriptomev3.1-blast-uniprotGO.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+```
+Wrote out 08/25/2020. Commented out code. 
+
+
 Read in the table from the BLAST to GOslim jupyter notebook called "Blastquery-GOslim.tab":
 ```{r}
 blastquery <- read.delim("../analyses/BLAST-to-GOslim/Blastquery-GOslim.tab", sep = '\t', header = FALSE)
