@@ -9,19 +9,20 @@ library(dplyr)
 library(tidyverse)
 ```
 
-Read in the uniprot-SP-GO.sorted file:
+Read in the annotation from the transcriptome v 3.1 blast output:
 ```{r}
-uniprot_SP_GO <- read.delim("http://owl.fish.washington.edu/halfshell/bu-alanine-wd/17-07-20/uniprot-SP-GO.sorted", sep = '\t', header = FALSE)
-head(uniprot_SP_GO)
+uniprot <- read.delim("../data/transcriptome-v-3.1-annot.tab", sep = '\t', header = TRUE)
+head(uniprot)
 ```
+12931 annotations 
 
 Rename columns:
 ```{r}
-colnames(uniprot_SP_GO) <- c("uniprot_acc_ID", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12")
-head(uniprot_SP_GO)
+colnames(uniprot) <- c("uniprot_acc_ID", "Entry", "Entry.name", "Status", "Protein.names", "Geme.names", "Organism", "Length")
+head(uniprot)
 ```
 
-Read in `blast` output from transcriptome v 3.1:
+Read in `blast` output from transcriptome v 3.1 - unique Trinity IDs (48551):
 ```{r}
 blast <- read.delim("../analyses/BLAST-to-GOslim/_blast-sep.tab", header = FALSE)
 head(blast)
@@ -35,17 +36,17 @@ head(blast)
 
 `join` the `blast` output with the uniprot-SP-GO by uniprot_acc_ID:
 ```{r}
-blastgo <- left_join(blast, uniprot_SP_GO, by = "uniprot_acc_ID")
+blastgo <- left_join(blast, uniprot, by = "uniprot_acc_ID")
 head(blastgo)
 ```
-50038 rows with 25 columns
+48551 rows with 21 columns
 
 Read in the table from the BLAST to GOslim jupyter notebook called "Blastquery-GOslim.tab":
 ```{r}
 blastquery <- read.delim("../analyses/BLAST-to-GOslim/Blastquery-GOslim.tab", sep = '\t', header = FALSE)
 head(blastquery)
 ```
-459411 rows.
+456451 rows.
 
 Add column names:
 ```{r}
@@ -59,21 +60,21 @@ stress <- blastquery %>%
   filter(str_detect(GOslim, "stress"))
 head(stress)
 ```
-11046 Trinity IDs.
+10910 Trinity IDs.
 
 `join` the stress list with the annotated `blast` output with uniprot (blastgo):
 ```{r}
 stress_annot <- left_join(stress, blastgo, by = "Trinity_ID")
 head(stress_annot)
 ```
-36735 rows. 28 columns.       
-Some Trinity IDs have multiple GO IDs associated with it - hence the extra rows. 
+10910 rows. 24 columns.       
+
 
 write out the annotated stress response table:
 ```{r}
 #write.table(stress_annot, "../analyses/BLAST-to-GOslim/transcriptome-stress-genes.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/20/2020. Commented out code. 
+Wrote out 08/25/2020. Commented out code. 
 
 
 
