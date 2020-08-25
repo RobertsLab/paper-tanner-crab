@@ -11,14 +11,14 @@ library(tidyverse)
 
 Read in the annotation from the transcriptome v 3.1 blast output:
 ```{r}
-uniprot <- read.delim("../data/transcriptome-v-3.1-annot.tab", sep = '\t', header = TRUE)
+uniprot <- read.delim("../data/uniprotKB-transcrblast3.1-GO.tab", sep = '\t', header = TRUE)
 head(uniprot)
 ```
 12931 annotations 
 
 Rename columns:
 ```{r}
-colnames(uniprot) <- c("uniprot_acc_ID", "Entry", "Entry.name", "Status", "Protein.names", "Geme.names", "Organism", "Length")
+colnames(uniprot) <- c("uniprot_acc_ID", "Entry.name", "Status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
 head(uniprot)
 ```
 
@@ -39,7 +39,7 @@ head(blast)
 blastgo <- left_join(blast, uniprot, by = "uniprot_acc_ID")
 head(blastgo)
 ```
-48551 rows with 21 columns
+48551 rows with 25 columns
 
 Write out annotated blast go output:
 ```{r}
