@@ -19,28 +19,10 @@ library(RColorBrewer)
 
 ## Read in files: 
 
-1. `blast` output from transcriptome v 3.1:
+1. `blast` output from transcriptome v 3.1 with uniprot and GO:
 ```{r}
-blast <- read.delim("../analyses/BLAST-to-GOslim/_blast-sep.tab", header = FALSE)
-head(blast)
-```
-
-Rename first and third column for `join`-ing purposes later on. 
-```{r}
-colnames(blast) <- c("Trinity_ID", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14")
-head(blast)
-```
-
-2. Read in uniprot-SP-GO file
-```{r}
-uniprot_SP_GO <- read.delim("http://owl.fish.washington.edu/halfshell/bu-alanine-wd/17-07-20/uniprot-SP-GO.sorted", sep = '\t', header = FALSE)
-head(uniprot_SP_GO)
-```
-
-Rename columns:
-```{r}
-colnames(uniprot_SP_GO) <- c("uniprot_acc_ID", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12")
-head(uniprot_SP_GO)
+blast_go <- read.delim("../data/transcriptomev3.1-blast-uniprotGO.tab", header = TRUE)
+head(blast_go)
 ```
 
 ### Load in data of counts from individual crab RNAseq (transcriptome v 3.1): 
@@ -82,7 +64,7 @@ heatmapBrBG <- RColorBrewer::brewer.pal(11, "BrBG")
 ```
 
 ### Make heatmap using `pheatmap`
-39158 rows      
+78649 rows      
 Filter out rows that have 0 across all samples:
 ```{r}
 norm_counts <- norm_counts[rowSums(norm_counts[, -1] >0) !=0, ]
@@ -187,11 +169,11 @@ pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, 
 
 save heatmap to analyses/pheatmap:
 ```{r}
-pdf("../analyses/pheatmap/individual-crab-over-time.pdf", width = 11, height = 8.5)
-pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
-dev.off()
+#pdf("../analyses/pheatmap/individual-crab-over-time.pdf", width = 11, height = 8.5)
+#pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+#dev.off()
 ```
-
+saved already. commented code out. 
 
 ### `join` heatmap info with clusters, `blast` output from transcriptome v 3.1 and uniprot-SP-GO. save to analyses/heatmaps
 
@@ -201,15 +183,9 @@ clust2 <- tibble::rownames_to_column(clust, "Trinity_ID")
 head(clust2)
 ```
 
-`join` with `blast` output:
+`join` with `blast` and uniprot GO output:
 ```{r}
-crab.blast <- left_join(clust2, blast, by = "Trinity_ID")
-head(crab.blast)
-```
-
-`join` with uniprot-SP-go:
-```{r}
-crab.blast.go <- left_join(crab.blast, uniprot_SP_GO, by = "uniprot_acc_ID")
+crab.blast.go <- left_join(clust2, blast_go, by = "Trinity_ID")
 head(crab.blast.go)
 ```
 
@@ -217,7 +193,7 @@ Write out into paper-tanner-crab/analyses/heatmaps:
 ```{r}
 #write.table(crab.blast.go, "../analyses/pheatmap/single_crab-clusters-blast-GO.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/21/2020. Comment out code. 
+Wrote out 08/26/2020. Comment out code. 
 
 
 
