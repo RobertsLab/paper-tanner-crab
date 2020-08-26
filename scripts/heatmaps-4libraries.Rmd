@@ -183,36 +183,15 @@ pheatmap(noz_contrasttemp.heatmap, scale = "row", cluster_row = TRUE, cluster_co
 
 save heatmap to analyses/pheatmap:
 ```{r}
-pdf("../analyses/pheatmap/tempinfluenced-infectionDEGs-heatmap.pdf", width = 11, height = 8.5)
-pheatmap(noz_contrasttemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapPurpleOrange, fontsize_col = 12, fontsize_row = 12)
-dev.off()
+#pdf("../analyses/pheatmap/tempinfluenced-infectionDEGs-heatmap.pdf", width = 11, height = 8.5)
+#pheatmap(noz_contrasttemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapPurpleOrange, fontsize_col = 12, fontsize_row = 12)
+#dev.off()
 ```
+saved earlier. commented out code 08/26/2020. 
+
 
 ### `join` count data from heatmap with transcriptome v 3.1 `blast` output and uniprot-SP-GO annotation:
 
-Load in `blast` output and uniprot-SP-GO files:
-```{r}
-blast <- read.delim("../analyses/BLAST-to-GOslim/_blast-sep.tab", header = FALSE)
-head(blast)
-```
-
-Rename first and third column for `join`-ing purposes later on. 
-```{r}
-colnames(blast) <- c("Trinity_ID", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14")
-head(blast)
-```
-
-Read in uniprot-SP-GO file
-```{r}
-uniprot_SP_GO <- read.delim("http://owl.fish.washington.edu/halfshell/bu-alanine-wd/17-07-20/uniprot-SP-GO.sorted", sep = '\t', header = FALSE)
-head(uniprot_SP_GO)
-```
-
-Rename columns:
-```{r}
-colnames(uniprot_SP_GO) <- c("uniprot_acc_ID", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12")
-head(uniprot_SP_GO)
-```
 
 Set rownames in heatmap matrix as column called "Trinity_ID":
 
@@ -221,15 +200,10 @@ contrast.clust <- tibble::rownames_to_column(contrast.clust, "Trinity_ID")
 head(contrast.clust)
 ```
 
-`join` the `blast` output with the uniprot-SP-GO:  
-```{r}
-blast_uniprot <- left_join(blast, uniprot_SP_GO, by = "uniprot_acc_ID")
-head(blast_uniprot)
-```
 
-`join` the previous file with contrast.clust:
+`join` the transcriptome v 3.1 blast output and uniprot GO file with contrast.clust:
 ```{r}
-blast_uniprot_contrast <- left_join(contrast.clust, blast_uniprot, by = "Trinity_ID")
+blast_uniprot_contrast <- left_join(contrast.clust, blast_GO, by = "Trinity_ID")
 head(blast_uniprot_contrast)
 ```
 
@@ -237,7 +211,7 @@ write out table:
 ```{r}
 #write.table(blast_uniprot_contrast, "../analyses/pheatmap/contrasttemp_DEGs-clusters-annot.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/21/2020. Commented out code. 
+Wrote out 08/26/2020. Commented out code. 
 
 
 
