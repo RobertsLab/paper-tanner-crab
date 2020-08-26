@@ -362,7 +362,8 @@ Read in the table of genes with clusters and annotation from the individual crab
 singlecrab.genes <- read.delim("../analyses/pheatmap/single_crab-clusters-blast-GO.tab")
 head(singlecrab.genes)
 ```
-13978 rows. Some duplicate trinity IDs as a result of `join`-ing with `blast` output. There are 13,954 unique genes. 
+13954 rows. 
+
 
 Set the rownames to a column called "Trintity_ID" for tempcon.heatmap:
 ```{r}
@@ -381,7 +382,7 @@ Write out table to analyses:
 ```{r}
 #write.table(tempcon.singlecrab.genes, "../analyses/pheatmap/temp-influenced-infectionDEGs-singlecrab-overtime.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/21/2020. Commented out code. 
+Wrote out 08/26/2020. Commented out code. 
 
 
 
