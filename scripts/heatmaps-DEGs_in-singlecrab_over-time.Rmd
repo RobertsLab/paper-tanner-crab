@@ -341,21 +341,16 @@ head(temp.clust)
 ```
 
 ```{r}
-temp.blast <- left_join(temp.clust, blast, by = "Trinity_ID")
-head(temp.blast)
-```
-
-`join` with uniprot-SP-GO:
-```{r}
-temp.blast.go <- left_join(temp.blast, uniprot_SP_GO, by = "uniprot_acc_ID")
+temp.blast.go <- left_join(temp.clust, blast_go, by = "Trinity_ID")
 head(temp.blast.go)
 ```
+
 
 write out table to analyses/pheatmap:
 ```{r}
 #write.table(temp.blast.go, "../analyses/pheatmap/contrast-tempDEGs_singlecrab-cluster-blast-go.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/21/2020. Commented out code. 
+Wrote out 08/26/2020. Commented out code. 
 
 --------------------------------
 
