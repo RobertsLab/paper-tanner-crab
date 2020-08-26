@@ -68,30 +68,12 @@ pheatmap(noz_inftemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = 
 
 ### `join` with `blast` output and uniprot-SP-GO:
 
-Load in `blast` output and uniprot-SP-GO files:
+Load in `blast` output and uniprot-SP-GO file:
 ```{r}
-blast <- read.delim("../analyses/BLAST-to-GOslim/_blast-sep.tab", header = FALSE)
-head(blast)
+blast_GO <- read.delim("../data/transcriptomev3.1-blast-uniprotGO.tab", header = TRUE)
+head(blast_GO)
 ```
 
-
-Rename first and third column for `join`-ing purposes later on. 
-```{r}
-colnames(blast) <- c("Trinity_ID", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14")
-head(blast)
-```
-
-Read in uniprot-SP-GO file
-```{r}
-uniprot_SP_GO <- read.delim("http://owl.fish.washington.edu/halfshell/bu-alanine-wd/17-07-20/uniprot-SP-GO.sorted", sep = '\t', header = FALSE)
-head(uniprot_SP_GO)
-```
-
-Rename columns:
-```{r}
-colnames(uniprot_SP_GO) <- c("uniprot_acc_ID", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12")
-head(uniprot_SP_GO)
-```
 
 Set rownames for inftemp.heatmap as a column called "Trinity_ID":
 ```{r}
@@ -99,15 +81,9 @@ inftemp.heatmap <- tibble::rownames_to_column(inftemp.heatmap, "Trinity_ID")
 head(inftemp.heatmap)
 ```
 
-`join` the `blast` output with the uniprot-SP-GO:  
-```{r}
-blast_uniprot <- left_join(blast, uniprot_SP_GO, by = "uniprot_acc_ID")
-head(blast_uniprot)
-```
-
 `join` the previous file with inftemp.heatmap:
 ```{r}
-blast_uniprot_inftemp <- left_join(inftemp.heatmap, blast_uniprot, by = "Trinity_ID")
+blast_uniprot_inftemp <- left_join(inftemp.heatmap, blast_GO, by = "Trinity_ID")
 head(blast_uniprot_inftemp)
 ```
 
@@ -115,7 +91,7 @@ write out table with counts, blast output, and uniprot-SP-GO:
 ```{r}
 #write.table(blast_uniprot_inftemp, "../analyses/pheatmap/infection-temp-DEGs-counts_annot.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/21/2020. Commented out code. 
+Wrote out 08/26/2020. Commented out code. 
 
 ----
 
