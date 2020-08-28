@@ -364,25 +364,40 @@ head(singlecrab.genes)
 ```
 13954 rows. 
 
-
-Set the rownames to a column called "Trintity_ID" for tempcon.heatmap:
+Filter out the Trinity_ID column and all others except the count column, because that will be redundant in the final `join`-ed table. 
 ```{r}
-tempcon.heatmap <- tibble::rownames_to_column(tempcon.heatmap, "Trinity_ID")
-head(tempcon.heatmap)
+singlecrab.genes <- select(singlecrab.genes, "Trinity_ID", "cluster", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "Status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
+head(singlecrab.genes)
+```
+Rename cluster column and corrent the typo of "Geme.names":
+```{r}
+colnames(singlecrab.genes) <- c("Trinity_ID", "singlecrab.gene.cluster", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "Status", "Protein.names", "Gene.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
+head(singlecrab.genes)
+```
+
+temp.clust
+```{r}
+head(temp.clust)
+```
+
+Rename cluster column in temp.clust
+```{r}
+colnames(temp.clust) <- c("Trinity_ID","178","359","463", "temp.contrast.clusters")
+head(temp.clust)
 ```
 
 
 `join` the table of 94 temp-influenced infection DEGs (tempcon.heatmap) with the singlecrab.genes:
 ```{r}
-tempcon.singlecrab.genes <- left_join(tempcon.heatmap, singlecrab.genes, by = "Trinity_ID")
+tempcon.singlecrab.genes <- left_join(temp.clust, singlecrab.genes, by = "Trinity_ID")
 head(tempcon.singlecrab.genes)
 ```
 
 Write out table to analyses:
 ```{r}
-#write.table(tempcon.singlecrab.genes, "../analyses/pheatmap/temp-influenced-infectionDEGs-singlecrab-overtime.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+write.table(tempcon.singlecrab.genes, "../analyses/pheatmap/temp-influenced-infectionDEGs-singlecrab-overtime.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/26/2020. Commented out code. 
+Wrote out 08/28/2020. Commented out code. 
 
 
 
