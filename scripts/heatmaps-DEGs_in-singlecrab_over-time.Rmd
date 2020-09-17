@@ -271,17 +271,11 @@ head(tempcontrast_degs)
 
 `join` the DEGs with the norm_counts matrix to find out how many match between the two tables:
 ```{r}
-indiv_tempcon <- left_join(norm_counts, tempcontrast_degs, by = "Trinity_ID")
+indiv_tempcon <- left_join(tempcontrast_degs, norm_counts, by = "Trinity_ID")
 head(indiv_tempcon)
 ```
 123 genes 
 
-
-Just want the ones that match. Filter out just the rows that have something in column "". 
-```{r}
-indiv_tempcon <- filter(indiv_tempcon, baseMean != "NA")
-head(indiv_tempcon)
-```
 
 Pull out counts for the samples to make a heatmap
 ```{r}
@@ -344,7 +338,7 @@ head(temp.clust)
 temp.blast.go <- left_join(temp.clust, blast_go, by = "Trinity_ID")
 head(temp.blast.go)
 ```
-
+94 rows, 29 cols
 
 write out table to analyses/pheatmap:
 ```{r}
@@ -369,6 +363,7 @@ Filter out the Trinity_ID column and all others except the count column, because
 singlecrab.genes <- select(singlecrab.genes, "Trinity_ID", "cluster", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "Status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
 head(singlecrab.genes)
 ```
+
 Rename cluster column and corrent the typo of "Geme.names":
 ```{r}
 colnames(singlecrab.genes) <- c("Trinity_ID", "singlecrab.gene.cluster", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "Status", "Protein.names", "Gene.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
@@ -387,7 +382,7 @@ head(temp.clust)
 ```
 
 
-`join` the table of 94 temp-influenced infection DEGs (tempcon.heatmap) with the singlecrab.genes:
+`join` the table of 94 temp-influenced infection DEGs (temp.clust) with the singlecrab.genes:
 ```{r}
 tempcon.singlecrab.genes <- left_join(temp.clust, singlecrab.genes, by = "Trinity_ID")
 head(tempcon.singlecrab.genes)
@@ -395,10 +390,11 @@ head(tempcon.singlecrab.genes)
 
 Write out table to analyses:
 ```{r}
-write.table(tempcon.singlecrab.genes, "../analyses/pheatmap/temp-influenced-infectionDEGs-singlecrab-overtime.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+#write.table(tempcon.singlecrab.genes, "../analyses/pheatmap/temp-influenced-infectionDEGs-singlecrab-overtime.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/28/2020. Commented out code. 
+Wrote out 09/16/2020. Commented out code. 
 
+Some of the 94 temp-influenced infection DEGs do not show up in the single crab genes over time heatmap clustering. This is due to the fact that I had to pare down the number of genes in order to render the heatmap. The DEGs that are not present (22 of the 94) had too low of counts (less than 63 counts across all time points) and weren't included in the single crab genes over time heatmap. 
 
 
 
