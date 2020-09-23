@@ -1,0 +1,66 @@
+---
+title: "fig2 and fig 3 cluster join"
+output: html_document
+---
+Rmd to `join` the cluster heatmap information from Fig 2 in the manuscript (heatmap of the 123 DEGs in the 4 pooled samples) with the cluster heatmap information of the individual crab sequenced over time (Fig 3.) Only want the 94 that match.
+
+
+```{r}
+library(dplyr)
+library(tidyverse)
+```
+
+Read in annotated temp-influenced infection DEG table (Fig 2):
+```{r}
+temp.annot <- read.delim("../analyses/pheatmap/contrasttemp_DEGs-clusters-annot.tab")
+head(temp.annot)
+```
+
+Rename columns:
+```{r}
+colnames(temp.annot) <- c("Trinity_ID", "380822", "380823", "380824", "temp.con.fig2", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
+head(temp.annot)
+```
+
+Read in single crab gene cluster annotated list:
+Read in the table of genes with clusters and annotation from the individual crab over time heatmap (from Rmd: heatmaps-single_crab-over-time.Rmd) 
+```{r}
+singlecrab.genes <- read.delim("../analyses/pheatmap/single_crab-clusters-blast-GO.tab")
+head(singlecrab.genes)
+```
+
+13954 rows. 
+
+Filter out the Trinity_ID column and all others except the count column, because that will be redundant in the final `join`-ed table. 
+```{r}
+singlecrab.genes <- select(singlecrab.genes, "Trinity_ID", "cluster")
+head(singlecrab.genes)
+```
+
+Rename cluster column and corrent the typo of "Geme.names", and add '.Fig3" to end of "singlecrab.gene.cluster" column name to note the manuscript figure number:
+```{r}
+colnames(singlecrab.genes) <- c("Trinity_ID", "singlecrab.gene.cluster.Fig3")
+head(singlecrab.genes)
+```
+
+`join` the two tables by "Trinity_ID"
+```{r}
+temp.degs.single <- left_join(temp.annot, singlecrab.genes, by = "Trinity_ID")
+head(temp.degs.single)
+```
+Rearrange so the two cluster columns are next to each other. 
+
+```{r}
+col_order <- c("Trinity_ID", "380822", "380823", "380824", "temp.con.fig2", "singlecrab.gene.cluster.Fig3", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
+
+temp.degs.single2 <- temp.degs.single[, col_order]
+head(temp.degs.single2)
+```
+
+Write out table to analyses:
+```{r}
+#write.table(temp.degs.single2, "../analyses/pheatmap/temp-influenced-infectionDEGs-singlecrab-overtime.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+```
+Wrote out 9/22/2020. Commented out code. 
+
+
