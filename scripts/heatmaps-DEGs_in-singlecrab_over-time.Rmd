@@ -364,9 +364,9 @@ singlecrab.genes <- select(singlecrab.genes, "Trinity_ID", "cluster", "V2", "uni
 head(singlecrab.genes)
 ```
 
-Rename cluster column and corrent the typo of "Geme.names":
+Rename cluster column and corrent the typo of "Geme.names", and add '.Fig3" to end of "singlecrab.gene.cluster" column name to note the manuscript figure number:
 ```{r}
-colnames(singlecrab.genes) <- c("Trinity_ID", "singlecrab.gene.cluster", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "Status", "Protein.names", "Gene.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
+colnames(singlecrab.genes) <- c("Trinity_ID", "singlecrab.gene.cluster.Fig3", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "Status", "Protein.names", "Gene.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
 head(singlecrab.genes)
 ```
 
@@ -377,7 +377,7 @@ head(temp.clust)
 
 Rename cluster column in temp.clust
 ```{r}
-colnames(temp.clust) <- c("Trinity_ID","178","359","463", "temp.contrast.clusters")
+colnames(temp.clust) <- c("Trinity_ID","178","359","463", "temp.degs.single.crab")
 head(temp.clust)
 ```
 
@@ -392,7 +392,7 @@ Write out table to analyses:
 ```{r}
 #write.table(tempcon.singlecrab.genes, "../analyses/pheatmap/temp-influenced-infectionDEGs-singlecrab-overtime.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 09/16/2020. Commented out code. 
+Wrote out 09/22/2020. Commented out code. 
 
 Some of the 94 temp-influenced infection DEGs do not show up in the single crab genes over time heatmap clustering. This is due to the fact that I had to pare down the number of genes in order to render the heatmap. The DEGs that are not present (22 of the 94) had too low of counts (less than 63 counts across all time points) and weren't included in the single crab genes over time heatmap. 
 
