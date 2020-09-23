@@ -18,7 +18,7 @@ head(temp.annot)
 
 Rename columns:
 ```{r}
-colnames(temp.annot) <- c("Trinity_ID", "380822", "380823", "380824", "temp.con.fig2", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
+colnames(temp.annot) <- c("Trinity_ID", "380822", "380823", "380824", "380825", "temp.con.fig2", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
 head(temp.annot)
 ```
 
@@ -51,7 +51,7 @@ head(temp.degs.single)
 Rearrange so the two cluster columns are next to each other. 
 
 ```{r}
-col_order <- c("Trinity_ID", "380822", "380823", "380824", "temp.con.fig2", "singlecrab.gene.cluster.Fig3", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
+col_order <- c("Trinity_ID", "380822", "380823", "380824", "380825", "temp.con.fig2", "singlecrab.gene.cluster.Fig3", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
 
 temp.degs.single2 <- temp.degs.single[, col_order]
 head(temp.degs.single2)
