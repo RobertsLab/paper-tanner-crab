@@ -52,9 +52,10 @@ norm_counts <- tibble::rownames_to_column(norm_counts, "Trinity_ID")
 head(norm_counts)
 ```
 
-Rename sample columns: 
+Rename sample columns:     
+Library IDs: 178 for Day 0; 359 for Day 2, and 463 for Dday 17
 ```{r}
-colnames(norm_counts) <- c("Trinity_ID", "178", "359", "463")
+colnames(norm_counts) <- c("Trinity_ID", "Day0", "Day02", "Day17")
 head(norm_counts)
 ```
 
@@ -88,7 +89,7 @@ Now there's 13,954 rows.
 
 Remove "sums" column from count matrix for heatmap:      
 ```{r}
-crab.heatmap <- select(norm_counts_highcts, "Trinity_ID", "178", "359", "463")
+crab.heatmap <- select(norm_counts_highcts, "Trinity_ID", "Day0", "Day02", "Day17")
 head(crab.heatmap)
 ```
 
@@ -132,31 +133,30 @@ clusters <- data.frame(cluster = ifelse(clusters == 1, "cluster1", ifelse(cluste
 head(clusters)
 ```
 
+The following four chunks are commented out because they are now unnecessary/redundant
+
 Add column annotations for the samples denoting temperature treatment and infection status, and sampling day:
 ```{r}
-sample_col <- data.frame(temperature = c("ambient", "ambient", "ambient"))
-row.names(sample_col) <-colnames(crab.heatmap)
-sample_col
+#sample_col <- data.frame(temperature = c("ambient", "ambient", "ambient"))
+#row.names(sample_col) <-colnames(crab.heatmap)
+#sample_col
 ```
 
 add infection status info:
 ```{r}
-sample_col$infection.status <- c("infected", "infected", "infected")
-sample_col
+#sample_col$infection.status <- c("infected", "infected", "infected")
+#sample_col
 ```
 
 add sampling day info:
 ```{r}
-sample_col$sampling.day <- c("day0", "day2", "day17")
-sample_col
+#sample_col$sampling.day <- c("day0", "day2", "day17")
+#sample_col
 ```
 
 specify colors for annotation columns:
 ```{r}
 my_colors <- list(
-  temperature = c(ambient = "orange"),
-  infection.status = c(infected = "yellow"),
-  sampling.day = c(day0 = "green", day2 = "red", day17 = "blue"),
   cluster = c(cluster1 = "#1B9E77", cluster2 = "#D95F02", cluster3 = "#7570B3", cluster4 = "#E7298A", cluster5 = "#cc4ee0", cluster6 = "#82ed82")
 )
 my_colors
@@ -164,16 +164,16 @@ my_colors
 
 
 ```{r}
-pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 200, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 200, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
 ```
 
 save heatmap to analyses/pheatmap:
 ```{r}
-#pdf("../analyses/pheatmap/individual-crab-over-time.pdf", width = 11, height = 8.5)
-#pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
-#dev.off()
+pdf("../analyses/pheatmap/individual-crab-over-time.pdf", width = 11, height = 8.5)
+pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+dev.off()
 ```
-saved already. commented code out. 
+Save new version without redundant annotations for temperature and infection status. 11/12/2020
 
 ### `join` heatmap info with clusters, `blast` output from transcriptome v 3.1 and uniprot-SP-GO. save to analyses/heatmaps
 
