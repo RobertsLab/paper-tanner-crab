@@ -4,7 +4,7 @@
 [Supp01-sample-list_pool-RNAseq.csv](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplemental-material/Supp01-sample-list_pool-RNAseq.csv)       
 - Table containing metadata to the sample level for the RNAseq libraries
 
-[Supp02-RNAsequ-libraries.png](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplemental-material/Supp02-RNAsequ-libraries.png)         
+[Supp02-RNAsequ-libraries.csv](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplemental-material/Supp02-RNAsequ-libraries.csv)         
 - Table containing descriptions of the pooled RNAseq libraries
 
 [Supp03-cbai_transcriptome_v3.1.zip](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplemental-material/Supp03-cbai_transcriptome_v3.1.zip)     
