@@ -14,7 +14,7 @@ PDF of GOslim pie using all terms from the transcriptome v 3.1, including those 
 - [transcriptome-stress-genes.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/BLAST-to-GOslim/transcriptome-stress-genes.tab)         
 Table of stress response genes from transcriptome v 3.1 according to the GOslim term "stress response". 
 
-## [DAVID-outputs](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/DAVID-outputs)    
+## [`DAVID-outputs`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/DAVID-outputs)    
 #### [`single-crab-genes`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/DAVID-outputs/single-crab-genes):       
 `DAVID` output files from the single crab genes over time heatmap clusters (**Fig. 3**)     
 6 clusters, one file per clusters. Clusters 5 and 6 are very small compared to the other 4, and as such are not discussed in the paper.    
