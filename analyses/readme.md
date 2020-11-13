@@ -48,6 +48,17 @@ One of the files from `kallisto`.
 - [kallisto-0812.isoform.counts.matrix](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/kallisto-0812/kallisto-0812.isoform.counts.matrix)    
 Count matrix for hte 4 libraries. Used in `DESeq2` Rmd: [scripts/DESeq.Rmd](https://github.com/RobertsLab/paper-tanner-crab/blob/master/scripts/DESeq.Rmd) 
 
+### [`kallisto-single_crab_over_time`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/kallisto-single_crab_over_time)     
+Output files from the jupyter notebook to get gene count data from the individual crab RNAseq libraries for visualization. Jupyter notebook: [notebooks/kallisto-individual-crab.ipynb](https://github.com/RobertsLab/paper-tanner-crab/blob/master/notebooks/kallisto-individual-crab.ipynb)    
+- [kallisto-single-crab.isoform.TMM.EXPR.matrix](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/kallisto-single_crab_over_time/kallisto-single-crab.isoform.TMM.EXPR.matrix)      
+One of the files from `kallisto`.     
+- [kallisto-single-crab.isoform.TPM.not_cross_norm](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/kallisto-single_crab_over_time/kallisto-single-crab.isoform.TPM.not_cross_norm)    
+One of the files from `kallisto`.     
+- [kallisto-single-crab.isoform.TPM.not_cross_norm.runTMM.R](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/kallisto-single_crab_over_time/kallisto-single-crab.isoform.TPM.not_cross_norm.runTMM.R)    
+One of the files from `kallisto`.      
+- [kallisto-single-crab.isoform.counts.matrix](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/kallisto-single_crab_over_time/kallisto-single-crab.isoform.counts.matrix)        
+Count matrix for the 3 libraries of the individual crab over time. Used in this Rmd to visualize counts: [scripts/heatmaps-single_crab-over-time.Rmd](https://github.com/RobertsLab/paper-tanner-crab/blob/master/scripts/heatmaps-single_crab-over-time.Rmd).  
+
 ### [`pheatmap`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/pheatmap)          
 - [tempinfluenced-infectionDEGs-heatmap.pdf](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/pheatmap/tempinfluenced-infectionDEGs-heatmap.pdf)        
 Heatmap of infection DEGs that are influenced by temperature treatment. Annotated cluster row, and sample annotations. Created in this Rmd: [scripts/heatmaps-4libraries.Rmd](https://github.com/RobertsLab/paper-tanner-crab/blob/master/scripts/heatmaps-4libraries.Rmd)      
