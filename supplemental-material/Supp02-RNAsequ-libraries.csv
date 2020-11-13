@@ -1,0 +1,12 @@
+Library_ID,Sequencing_ID,Sample_day,Infection_status,Temperature_treatment,Number_of_samples-crabs-in_pool
+1,380822,2,uninfected,decreased,10
+2,380823,2,infected,decreased,10
+3,380824,2,uninfected,elevated,10
+4,380825,2,infected,elevated,10
+5,304428,17,combined,combined,15
+6,380821,0,infected,combined,10
+7,380820,0,uninfected,combined,10
+8,329774,2,infected,combined,10
+9,329775,2,uninfected,combined,11
+10,329776,17,infected,combined,12
+11,329777,17,uninfected,combined,11
