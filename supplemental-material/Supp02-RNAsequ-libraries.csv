@@ -4,8 +4,8 @@ Library_ID,Sequencing_ID,Sample_day,Infection_status,Temperature_treatment,Numbe
 3,380824,2,uninfected,elevated,10
 4,380825,2,infected,elevated,10
 5,304428,17,combined,combined,15
-6,380821,0,infected,combined,10
-7,380820,0,uninfected,combined,10
+6,380821,0,infected,ambient,10
+7,380820,0,uninfected,ambient,10
 8,329774,2,infected,combined,10
 9,329775,2,uninfected,combined,11
 10,329776,17,infected,combined,12
