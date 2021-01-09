@@ -83,11 +83,13 @@ write out the annotated stress response table:
 ```
 Wrote out 08/25/2020. Commented out code. 
 
+#### find unique Trinity_IDs (tells how many contigs fall under the category "Stress Response": 
 
-
-
-
-
+```{r}
+distinct_stress <- unique(stress_annot$Trinity_ID)
+head(distinct_stress)
+```
+6191 rows. 
 
 
 
