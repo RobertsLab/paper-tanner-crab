@@ -81,7 +81,7 @@ write out the annotated stress response table:
 ```{r}
 #write.table(stress_annot, "../analyses/BLAST-to-GOslim/transcriptome-stress-genes.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/25/2020. Commented out code. 
+Wrote out 02/11/2021. Commented out code. 
 
 #### find unique Trinity_IDs (tells how many contigs fall under the category "Stress Response": 
 
