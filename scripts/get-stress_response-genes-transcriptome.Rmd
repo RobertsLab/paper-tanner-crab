@@ -30,7 +30,7 @@ head(blast)
 
 Rename first and third column for `join`-ing purposes later on. 
 ```{r}
-colnames(blast) <- c("Trinity_ID", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14")
+colnames(blast) <- c("Trinity_ID", "swissprot", "uniprot_acc_ID", "gene_id", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitescore")
 head(blast)
 ```
 
@@ -45,7 +45,7 @@ Write out annotated blast go output:
 ```{r}
 #write.table(blastgo, "../data/transcriptomev3.1-blast-uniprotGO.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/25/2020. Commented out code. 
+Wrote out 02/11/2021. Commented out code. 
 
 
 Read in the table from the BLAST to GOslim jupyter notebook called "Blastquery-GOslim.tab":
