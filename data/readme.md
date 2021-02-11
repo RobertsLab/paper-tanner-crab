@@ -1,10 +1,5 @@
 ## `data` directory contents: 
 
-- [transcriptomev3.1-blast-uniprotGO.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/data/transcriptomev3.1-blast-uniprotGO.tab)      
-Table of the transcriptome v 3.1 `BLAST` output with gene ontology information.      
-- [uniprot-DEG-annot.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/data/uniprot-DEG-annot.tab)        
-_Not quite sure what this is..._         
-- [uniprotKB-transcrblast3.1-GO.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/data/uniprotKB-transcrblast3.1-GO.tab)         
-Table of _what..._
+- [cbai_transcriptome_v3.1.zip](https://github.com/RobertsLab/paper-tanner-crab/blob/master/data/cbai_transcriptome_v3.1.zip)    
+.zip of the transcriptome (v 3.1) used as the basis for differential expressoin analyses and characterization of crab response to temperature and infection with _Hematodinium_ 
 
-- ADD .ZIP of transcriptome? 
