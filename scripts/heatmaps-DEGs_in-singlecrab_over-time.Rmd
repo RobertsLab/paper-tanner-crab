@@ -22,7 +22,7 @@ library(RColorBrewer)
 
 1. `blast` output from transcriptome v 3.1 with uniprot GO annotation:
 ```{r}
-blast_go <- read.delim("../data/transcriptomev3.1-blast-uniprotGO.tab", header = TRUE)
+blast_go <- read.delim("../analyses/BLAST-to-GOslim//transcriptomev3.1-blast-uniprotGO.tab", header = TRUE)
 head(blast_go)
 ```
 
@@ -155,7 +155,7 @@ Write out:
 ```{r}
 #write.table(inf.blast.go, "../analyses/pheatmap/infectionDEGs_singlecrab-clust-blast-go.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-wrote out 08/26/2020. commented out code. 
+wrote out 02/11/2021. commented out code. 
 
 
 
