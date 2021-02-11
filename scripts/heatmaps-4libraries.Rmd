@@ -70,7 +70,7 @@ pheatmap(noz_inftemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = 
 
 Load in `blast` output and uniprot-SP-GO file:
 ```{r}
-blast_GO <- read.delim("../data/transcriptomev3.1-blast-uniprotGO.tab", header = TRUE)
+blast_GO <- read.delim("../analyses/BLAST-to-GOslim/transcriptomev3.1-blast-uniprotGO.tab", header = TRUE)
 head(blast_GO)
 ```
 
@@ -91,7 +91,7 @@ write out table with counts, blast output, and uniprot-SP-GO:
 ```{r}
 #write.table(blast_uniprot_inftemp, "../analyses/pheatmap/infection-temp-DEGs-counts_annot.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/26/2020. Commented out code. 
+Wrote out 02/11/2021. Commented out code. 
 
 ----
 
