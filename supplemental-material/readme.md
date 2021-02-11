@@ -8,7 +8,7 @@
 - Table containing descriptions of the pooled RNAseq libraries
 
 [Supp03-cbai_transcriptome_v3.1.zip](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplemental-material/Supp03-cbai_transcriptome_v3.1.zip)     
-- Compressed _C. bairdi_ assembled transcriptome
+- Compressed _C. bairdi_ assembled transcriptome, with non-_Alveolata_ taxonomic filter
 
 [Supp04-transcriptomev3.1-blast-uniprotGO.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplemental-material/Supp04-transcriptomev3.1-blast-uniprotGO.tab)         
 - Table of the _C. bairdi_ transcriptome BLAST results with uniprot/swissprot and gene ontology information
