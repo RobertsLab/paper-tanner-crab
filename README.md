@@ -1,7 +1,7 @@
 # paper-tanner-crab
 Repository for scripts, notebooks, data, and analyses associated with the paper entitled:    
 
-Characterization of the gene repertoire and environmentally driven expression patterns in Tanner crab (Chionoecetes bairdi)     
+**Characterization of the gene repertoire and environmentally driven expression patterns in Tanner crab (_Chionoecetes bairdi_)**    
 
 Grace Crandall<sup>1</sup>, Pamela C. Jensen<sup>2</sup>, Sam White<sup>1</sup>, Steven Roberts<sup>1*</sup>
 
