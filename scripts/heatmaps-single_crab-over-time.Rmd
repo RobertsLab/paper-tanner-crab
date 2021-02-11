@@ -21,7 +21,7 @@ library(RColorBrewer)
 
 1. `blast` output from transcriptome v 3.1 with uniprot and GO:
 ```{r}
-blast_go <- read.delim("../data/transcriptomev3.1-blast-uniprotGO.tab", header = TRUE)
+blast_go <- read.delim("../analyses/BLAST-to-GOslim/transcriptomev3.1-blast-uniprotGO.tab", header = TRUE)
 head(blast_go)
 ```
 
@@ -193,7 +193,7 @@ Write out into paper-tanner-crab/analyses/heatmaps:
 ```{r}
 #write.table(crab.blast.go, "../analyses/pheatmap/single_crab-clusters-blast-GO.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/26/2020. Comment out code. 
+Wrote out 02/11/2021. Comment out code. 
 
 
 
