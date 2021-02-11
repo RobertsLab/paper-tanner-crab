@@ -344,6 +344,6 @@ write out table to analyses/pheatmap:
 ```{r}
 #write.table(temp.blast.go, "../analyses/pheatmap/contrast-tempDEGs_singlecrab-cluster-blast-go.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 08/26/2020. Commented out code. 
+Wrote out 02/11/2021. Commented out code. 
 
 --------------------------------
