@@ -43,7 +43,7 @@ head(blastgo)
 
 Write out annotated blast go output:
 ```{r}
-#write.table(blastgo, "../data/transcriptomev3.1-blast-uniprotGO.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+#write.table(blastgo, "../analyses/BLAST-to-GOslim/transcriptomev3.1-blast-uniprotGO.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
 Wrote out 02/11/2021. Commented out code. 
 
