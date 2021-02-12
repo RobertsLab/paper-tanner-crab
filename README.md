@@ -8,9 +8,8 @@ Grace Crandall<sup>1</sup>, Pamela C. Jensen<sup>2</sup>, Sam White<sup>1</sup>,
 <sup>1</sup> School of Aquatic and Fishery Sciences, University of Washington, Seattle, Washington 98105, United States          
 <sup>2</sup> Resource Assessment and Conservation Engineering Division, Alaska Fisheries Science Center, National Marine Fisheries Service, NOAA, 7600 Sand Point Way NE, Seattle, WA 98115, United States
 
----
-Directory contents    
----
+
+# Directory contents    
 
 # [analyses](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses)     
 
@@ -28,7 +27,8 @@ PDF of GOslim pie using all terms from the transcriptome v 3.1, including those 
 - [transcriptome-stress-genes.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/BLAST-to-GOslim/transcriptome-stress-genes.tab)         
 Table of stress response genes from transcriptome v 3.1 according to the GOslim term "stress response". 
 
-## [`DAVID-outputs`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/DAVID-outputs)    
+
+### [`DAVID-outputs`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/DAVID-outputs)       
 #### [`single-crab-genes`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/DAVID-outputs/single-crab-genes):       
 `DAVID` output files from the single crab genes over time heatmap clusters (**Fig. 3**)     
 6 clusters, one file per clusters. Clusters 5 and 6 are very small compared to the other 4, and as such are not discussed in the paper.    
@@ -51,6 +51,7 @@ List of 1343 DEGs comparing infection status. List includes count data from the 
 - [DEGlist-infectionONLY.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/DESeq2/DEGlist-infectionONLY.tab)       
 List of 1343 DEGs comparing infection status. 
 
+
 ### [`kallisto-0812`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/kallisto-0812)      
 Output files from this jupyter notebook to get gene count data from the 4 libraries used for `DESeq2`. Jupyter notebook: [notebooks/kallisto-4libraries.ipynb](https://github.com/RobertsLab/paper-tanner-crab/blob/master/notebooks/kallisto-4libraries.ipynb)       
 - [kallisto-0812.isoform.TMM.EXPR.matrix](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/kallisto-0812/kallisto-0812.isoform.TMM.EXPR.matrix)          
@@ -62,6 +63,7 @@ One of the files from `kallisto`.
 - [kallisto-0812.isoform.counts.matrix](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/kallisto-0812/kallisto-0812.isoform.counts.matrix)    
 Count matrix for hte 4 libraries. Used in `DESeq2` Rmd: [scripts/DESeq.Rmd](https://github.com/RobertsLab/paper-tanner-crab/blob/master/scripts/DESeq.Rmd) 
 
+
 ### [`kallisto-single_crab_over_time`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/kallisto-single_crab_over_time)     
 Output files from the jupyter notebook to get gene count data from the individual crab RNAseq libraries for visualization. Jupyter notebook: [notebooks/kallisto-individual-crab.ipynb](https://github.com/RobertsLab/paper-tanner-crab/blob/master/notebooks/kallisto-individual-crab.ipynb)    
 - [kallisto-single-crab.isoform.TMM.EXPR.matrix](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/kallisto-single_crab_over_time/kallisto-single-crab.isoform.TMM.EXPR.matrix)      
@@ -72,6 +74,7 @@ One of the files from `kallisto`.
 One of the files from `kallisto`.      
 - [kallisto-single-crab.isoform.counts.matrix](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/kallisto-single_crab_over_time/kallisto-single-crab.isoform.counts.matrix)        
 Count matrix for the 3 libraries of the individual crab over time. Used in this Rmd to visualize counts: [scripts/heatmaps-single_crab-over-time.Rmd](https://github.com/RobertsLab/paper-tanner-crab/blob/master/scripts/heatmaps-single_crab-over-time.Rmd).  
+
 
 ### [`pheatmap`](https://github.com/RobertsLab/paper-tanner-crab/tree/master/analyses/pheatmap)     
 - [contrast-tempDEGs_singlecrab-cluster-blast-go.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/pheatmap/contrast-tempDEGs_singlecrab-cluster-blast-go.tab)       
