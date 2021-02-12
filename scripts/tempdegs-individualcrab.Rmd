@@ -46,11 +46,11 @@ head(temp.degs.single)
 Rearrange so the two cluster columns are next to each other. 
 
 ```{r}
-temp.degs.single <- temp.degs.single %>% select("Trinity_ID", "X380822", "X380823", "X380824", "X380825", "cluster", "singlecrab.gene.cluster.Fig3", "swissprot", "uniprot_acc_ID", "gene_id", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitescore", "Entry.name", "Status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
+temp.degs.single <- temp.degs.single %>% select("Trinity_ID", "X380822", "X380823", "X380824", "X380825", "cluster", "singlecrab.gene.cluster.Fig3", "swissprot", "uniprot_acc_ID", "gene_id", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore", "Entry.name", "Status", "Protein.names", "Gene.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
 head(temp.degs.single)
 ```
 
-Rename column names that are typos:
+Rename column name column for the temperature contrast deg clusters (Fig. 2):
 ```{r}
 colnames(temp.degs.single) <- c("Trinity_ID", "380822", "380823", "380824", "380825", "temp.contrast.cluster.Fig2", "singlecrab.gene.cluster.Fig3", "swissprot", "uniprot_acc_ID", "gene_id", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore", "Entry.name", "Status", "Protein.names", "Gene.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
 head(temp.degs.single)
