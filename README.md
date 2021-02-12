@@ -3,7 +3,7 @@ Repository for scripts, notebooks, data, and analyses associated with the paper 
 
 **Characterization of the gene repertoire and environmentally driven expression patterns in Tanner crab (_Chionoecetes bairdi_)**    
 
-Grace Crandall<sup>1</sup>, Pamela C. Jensen<sup>2</sup>, Sam White<sup>1</sup>, Steven Roberts<sup>1*</sup>
+Grace Crandall<sup>1</sup>, Pamela C. Jensen<sup>2</sup>, Sam White<sup>1</sup>, Steven Roberts<sup>1</sup>
 
 <sup>1</sup> School of Aquatic and Fishery Sciences, University of Washington, Seattle, Washington 98105, United States          
 <sup>2</sup> Resource Assessment and Conservation Engineering Division, Alaska Fisheries Science Center, National Marine Fisheries Service, NOAA, 7600 Sand Point Way NE, Seattle, WA 98115, United States
