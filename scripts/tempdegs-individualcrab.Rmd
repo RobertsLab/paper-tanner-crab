@@ -1,5 +1,5 @@
 ---
-title: "fig2 and fig 3 cluster join"
+title: "fig2 and fig3 cluster join"
 output: html_document
 ---
 Rmd to `join` the cluster heatmap information from Fig 2 in the manuscript (heatmap of the 123 DEGs in the 4 pooled samples) with the cluster heatmap information of the individual crab sequenced over time (Fig 3.) Only want the 94 that match.
@@ -13,12 +13,6 @@ library(tidyverse)
 Read in annotated temp-influenced infection DEG table (Fig 2):
 ```{r}
 temp.annot <- read.delim("../analyses/pheatmap/contrasttemp_DEGs-clusters-annot.tab")
-head(temp.annot)
-```
-
-Rename columns:
-```{r}
-colnames(temp.annot) <- c("Trinity_ID", "380822", "380823", "380824", "380825", "temp.con.fig2", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
 head(temp.annot)
 ```
 
@@ -48,19 +42,24 @@ head(singlecrab.genes)
 temp.degs.single <- left_join(temp.annot, singlecrab.genes, by = "Trinity_ID")
 head(temp.degs.single)
 ```
+
 Rearrange so the two cluster columns are next to each other. 
 
 ```{r}
-col_order <- c("Trinity_ID", "380822", "380823", "380824", "380825", "temp.con.fig2", "singlecrab.gene.cluster.Fig3", "V2", "uniprot_acc_ID", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "Entry.name", "status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
+temp.degs.single <- temp.degs.single %>% select("Trinity_ID", "X380822", "X380823", "X380824", "X380825", "cluster", "singlecrab.gene.cluster.Fig3", "swissprot", "uniprot_acc_ID", "gene_id", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitescore", "Entry.name", "Status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
+head(temp.degs.single)
+```
 
-temp.degs.single2 <- temp.degs.single[, col_order]
-head(temp.degs.single2)
+Rename column names that are typos:
+```{r}
+colnames(temp.degs.single) <- c("Trinity_ID", "380822", "380823", "380824", "380825", "temp.contrast.cluster.Fig2", "singlecrab.gene.cluster.Fig3", "swissprot", "uniprot_acc_ID", "gene_id", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore", "Entry.name", "Status", "Protein.names", "Gene.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
+head(temp.degs.single)
 ```
 
 Write out table to analyses:
 ```{r}
-#write.table(temp.degs.single2, "../analyses/pheatmap/temp-influenced-infectionDEGs-singlecrab-overtime.tab", sep = '\t', quote = FALSE, row.names = FALSE)
+#write.table(temp.degs.single, "../analyses/pheatmap/temp-influenced-infectionDEGs-singlecrab-overtime.tab", sep = '\t', quote = FALSE, row.names = FALSE)
 ```
-Wrote out 9/22/2020. Commented out code. 
+Wrote out 02/11/2021. Commented out code. 
 
 
