@@ -30,7 +30,7 @@ head(blast)
 
 Rename first and third column for `join`-ing purposes later on. 
 ```{r}
-colnames(blast) <- c("Trinity_ID", "swissprot", "uniprot_acc_ID", "gene_id", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitescore")
+colnames(blast) <- c("Trinity_ID", "swissprot", "uniprot_acc_ID", "gene_id", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore")
 head(blast)
 ```
 
