@@ -14,3 +14,6 @@ From [notebooks/transcriptomev3.1-BLAST-to-GOslim.ipynb](https://github.com/Robe
 PDF of GOslim pie using all terms from the transcriptome v 3.1, including those less descriptive terms like "other biological processes" in order to make the pie slices more accurate.    
 - [transcriptome-stress-genes.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/BLAST-to-GOslim/transcriptome-stress-genes.tab)         
 Table of stress response genes from transcriptome v 3.1 according to the GOslim term "stress response". 
+- [transcriptomev3.1-blast-uniprotGO.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/analyses/BLAST-to-GOslim/transcriptomev3.1-blast-uniprotGO.tab)       
+Table of the transcriptome contigs with `BLASTx` output and uniprot/swissprot annotation. 
+
