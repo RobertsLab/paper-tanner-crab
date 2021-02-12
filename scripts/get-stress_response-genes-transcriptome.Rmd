@@ -18,7 +18,7 @@ head(uniprot)
 
 Rename columns:
 ```{r}
-colnames(uniprot) <- c("uniprot_acc_ID", "Entry.name", "Status", "Protein.names", "Geme.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
+colnames(uniprot) <- c("uniprot_acc_ID", "Entry.name", "Status", "Protein.names", "Gene.names", "Organism", "Length", "Gene.ontology.biological.process", "Gene.ontology.cellular.component", "Gene.ontology.GO", "Gene.ontology.molecular.function", "Gene.ontology.IDs")
 head(uniprot)
 ```
 
