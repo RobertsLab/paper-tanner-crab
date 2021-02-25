@@ -1,4 +1,7 @@
-# paper-tanner-crab
+# paper-tanner-crab    
+
+[![DOI](https://zenodo.org/badge/287077986.svg)](https://zenodo.org/badge/latestdoi/287077986)
+
 Repository for scripts, notebooks, data, and analyses associated with the paper entitled:    
 
 **Characterization of the gene repertoire and environmentally driven expression patterns in Tanner crab (_Chionoecetes bairdi_)**    
