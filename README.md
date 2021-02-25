@@ -8,6 +8,7 @@ Grace Crandall<sup>1</sup>, Pamela C. Jensen<sup>2</sup>, Sam White<sup>1</sup>,
 <sup>1</sup> School of Aquatic and Fishery Sciences, University of Washington, Seattle, Washington 98105, United States          
 <sup>2</sup> Resource Assessment and Conservation Engineering Division, Alaska Fisheries Science Center, National Marine Fisheries Service, NOAA, 7600 Sand Point Way NE, Seattle, WA 98115, United States
 
+### For broader background information on this project, visit [RobertsLab/project-crab](https://github.com/RobertsLab/project-crab)
 
 # Directory contents    
 
