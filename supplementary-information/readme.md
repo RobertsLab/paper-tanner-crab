@@ -49,6 +49,35 @@ Columns are:
 - [S4-transcriptome-stress-genes.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplemental-material/Supp05-transcriptome-stress-genes.tab)    
 Table of the _C. bairdi_ transcripts that fell under the GOslim term "Stress response".      
 
+Columns are:     
+`Trinity_ID` - contig ID from Trinity assembly     
+`GO_ID` -       
+`GOslim` - 
+`biological_process` -    
+`swissprot` -    
+`uniprot_acc_ID` - 
+`gene_id` -     
+`pident` - 
+`length` - 
+`mismatch` - 
+`gapopen` - 
+`qstart` - 
+`qend` - 
+`sstart` - 
+`send` - 
+`evalue` - 
+`bitescore` - 
+`Entry.name` - 
+`Status` - 
+`Protein_names` - 
+`Gene.names` - 
+`Organism` - 
+`Length` - 
+`Gene.ontology.biological.process` - 
+`Gene.ontonlogy.cellular.component` - 
+`Gene.ontology.GO` - 
+`Gene.ontology.molecular.function` - 
+`Gene.ontology.IDs` - 
 
 - [S5-infection-temp-DEGs-counts_annot.tab](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplemental-material/Supp06-infection-temp-DEGs-counts_annot.tab)        
 Table of the differentially expressed contigs between infected and uninfected crab taking temperature difference into account (decreased vs. elevated) at Day 2 (408 DEGs), including library count data and uniprot/swissprot and gene ontology information.
