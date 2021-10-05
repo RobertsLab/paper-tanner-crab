@@ -1,8 +1,8 @@
 ## Supplemental material directory contents: 
 
 
-- [S1-RNAsequ-libraries.csv](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplemental-material/Supp02-RNAsequ-libraries.csv)         
-Table containing descriptions of the pooled RNAseq libraries.      UPDATE THIS GRACE
+- [S1-RNAseq-libraries.md](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplemental-material/Supp02-RNAseq-libraries.md)         
+Table containing descriptions of RNAseq libraries, including their use.   UPDATE THIS GRACE
 
 Column are:     
 `Library_ID` - number assigned to the library. 11 total. All used to assemble transcriptome     
