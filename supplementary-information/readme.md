@@ -2,7 +2,7 @@
 
 
 - [S1-RNAsequ-libraries.csv](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplemental-material/Supp02-RNAsequ-libraries.csv)         
-Table containing descriptions of the pooled RNAseq libraries.      
+Table containing descriptions of the pooled RNAseq libraries.      UPDATE THIS GRACE
 
 Column are:     
 `Library_ID` - number assigned to the library. 11 total. All used to assemble transcriptome     
