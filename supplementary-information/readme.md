@@ -4,13 +4,15 @@
 - [S1-RNAseq-libraries.md](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplemental-material/Supp02-RNAseq-libraries.md)         
 Table containing descriptions of RNAseq libraries, including their use.   UPDATE THIS GRACE
 
-Column are:     
-`Library_ID` - number assigned to the library. 11 total. All used to assemble transcriptome     
-`Sequencing_ID` - number assigned to the pooled sample by the Northwest Genomics Center sequencing facility for library prep and RNAseq     
-`Sample_Day` - day of the experiment that the samples that comprise the pool are from. Day 0, Day 2, or Day 17. Some are pooled across time and are "_combined_"    
-`Infection_status` - infection status of the crab at the time of sampling. Some are pools of infected crab and some are pools of uninfected crab      
-`Temperature_treatment` - temperature that the crab were held at at the time of sampling. Some are at decreased (4C), ambient (7.5C), or elevated (10C). some pools combine temperature treatments      
-`Number_of_samples-crabs-in_pool` - the number of individuals that comprise the pooled sample that was sequenced 
+Column are:          
+`Sequencing ID` - number assigned to the pooled sample by the Northwest Genomics Center sequencing facility for library prep and RNAseq     
+`Sampling Day` - day of the experiment that the samples that comprise the pool are from. Day 0, Day 2, or Day 17. Some are pooled across time and are "_combined_"    
+`Infection Status` - infection status of the crab at the time of sampling. Some are pools of infected crab and some are pools of uninfected crab      
+`Temperature Treatment` - temperature that the crab were held at at the time of sampling. Some are at decreased (4C), ambient (7.5C), or elevated (10C). some pools combine temperature treatments      
+`Number of individual crab in library` - the number of individuals that comprise the pooled sample that was sequenced      
+`Pairs of reads pre-trim` - pairs of reads pre-trim            
+`Pairs of reads post-trim` - pairs of reads post-trim       
+`Library purpose` - library was used for either transcriptome assembly ("transcriptome"), differential gene expression analyses ("differential gene expression"), or used to track expressed genes in an individual crab over time ("time series of an individual crab")
 
 - [S2-cbai_transcriptome_v3.1.zip](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplemental-material/Supp03-cbai_transcriptome_v3.1.zip)     
 Compressed _C. bairdi_ assembled transcriptome, with non-_Alveolata_ taxonomic filter.
