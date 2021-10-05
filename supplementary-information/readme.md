@@ -215,6 +215,7 @@ Columns are:
 `Gene.ontology.molecular.function` - molecular function gene ontology           
 `Gene.ontology.IDs` - gene ontology IDs  
 
-
+- S9-SNPs_GO-GOslims_barplot.pdf
+Barplot showing percentages of GO terms assigned to each GOslim category for transcripts containing at least one SNP.
 
 
