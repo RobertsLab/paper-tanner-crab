@@ -218,4 +218,11 @@ Columns are:
 - S9-SNPs_GO-GOslims_barplot.pdf
 Barplot showing percentages of GO terms assigned to each GOslim category for transcripts containing at least one SNP.
 
+- S10-SNPs_GO-GOslims.csv
+Comma-separated table of Biological Process GOslim categorizations for transcripts with at least one SNP. Data used to generate S9-SNPs_GO-GOslims_barplot.pdf.
 
+Columns are:
+`GOslim`: GOslim accession.
+`Count`: Number of gene ontology terms assigned to the corresponding GOslim accession.
+`Percent`: Percantage of gene ontology terms assigned to the corresponding GOslim accession.
+`Term`: GOslim term associated with the corresponding GOslim accession.
