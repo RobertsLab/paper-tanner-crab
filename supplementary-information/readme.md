@@ -217,10 +217,10 @@ Columns are:
 `Gene.ontology.molecular.function` - molecular function gene ontology           
 `Gene.ontology.IDs` - gene ontology IDs  
 
-- S9-SNPs_GO-GOslims_barplot.pdf
+- [S9-SNPs_GO-GOslims_barplot.pdf](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplementary-information/S9-SNPs_GO-GOslims_barplot.pdf)
 Barplot showing percentages of GO terms assigned to each GOslim category for transcripts containing at least one SNP.
 
-- S10-SNPs_GO-GOslims.csv
+- [S10-SNPs_GO-GOslims.csv](https://github.com/RobertsLab/paper-tanner-crab/blob/master/supplementary-information/S10-SNPs_GO-GOslims.csv)
 Comma-separated table of Biological Process GOslim categorizations for transcripts with at least one SNP. Data used to generate S9-SNPs_GO-GOslims_barplot.pdf.
 
 Columns are:
