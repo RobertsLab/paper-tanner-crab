@@ -164,14 +164,13 @@ my_colors
 
 
 ```{r}
-pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 200, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 150, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
 ```
 
 save heatmap to analyses/pheatmap:
 ```{r}
-pdf("../analyses/pheatmap/individual-crab-over-time.pdf")
-
-pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 200, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
+pdf("../analyses/pheatmap/individual-crab-over-time.pdf", width = 11, height = 8.5)
+pheatmap(crab.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapBrBG, fontsize_col = 12, fontsize_row = 12)
 ```
 Save pdf for publication. 2022-02-24
 
