@@ -180,6 +180,8 @@ my_colors <- list(
 ```{r}
 pheatmap(noz_contrasttemp.heatmap, scale = "row", cluster_row = TRUE, cluster_cols = FALSE, clustering_distance_rows = "euclidean", clustering_method = "average", annotation_colors = my_colors, annotation_row = clusters, annotation_col = sample_col, show_rownames = FALSE, show_colnames = TRUE, treeheight_col = 80, legend = TRUE, color = heatmapPurpleOrange, fontsize_col = 12, fontsize_row = 12)
 ```
+Saved heatmap by right clicking > Save Image As, download as png, then open in preview, export > PDF, save. 
+
 
 save heatmap to analyses/pheatmap:
 ```{r}
